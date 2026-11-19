@@ -18,7 +18,7 @@ another agent it is supposed to collaborate with.
 
 ## Contents
 
-- [What is in the box](#what-is-in-the-box) and [architecture](#architecture)
+- [What is in the box](#what-is-in-the-box) and [architecture](#architecture), [demo](#demo)
 - [Status](#status) and [What has been measured](#what-has-been-measured)
 - [Setup](#setup)
 - [Running a target pipeline](#running-a-target-pipeline) and [an attack](#running-an-attack)
@@ -74,6 +74,20 @@ flowchart LR
         B1[coordinator] -->|conditional edge| B2[analyst] --> B3["executor<br/>(victim)"]
     end
 ```
+
+## Demo
+
+The console in [`demo/`](demo/) replays a recorded run as an animated agent graph and trace
+stream. Below, attack 2 (role spoofing) against pipeline #1: the researcher's message claims
+to come from the orchestrator, the summarizer saves the report under the injected filename,
+and the oracle scores the run a success. Open `demo/console.html` and press RUN to play it;
+see [`demo/RUNBOOK.md`](demo/RUNBOOK.md).
+
+![TrustGuard console replaying attack 2, role spoofing, against the research-assistant pipeline](docs/images/console.png)
+
+> The console is a recorded-run viewer made on 2026-08-26 and is not part of the benchmark.
+> Its coverage table predates attacks 1, 3, 4 and 5 being built; the matrix in
+> [`docs/matrix_phase4.md`](docs/matrix_phase4.md) is the current source.
 
 ## Status
 
