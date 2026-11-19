@@ -695,9 +695,8 @@
     padding: 3px 8px; border: 1px solid currentColor;
   }
   .chip.live { color: var(--hold); box-shadow: 0 0 12px rgba(63,232,176,.3); }
-  .chip.built { color: var(--inject); }
-  .chip.blocked { color: var(--impact); }
-  .chip.planned { color: #46527040; border-style: dashed; color: var(--dim); opacity: .6; }
+  .chip.measured { color: var(--inject); }
+  .chip.out-of-scope { color: var(--impact); border-style: dashed; }
   .legend {
     display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 10px 14px;
     border-top: 1px solid var(--line); font-size: 11.5px; color: var(--dim);
@@ -1892,8 +1891,8 @@
       esc(sc.attack.provider) + ":" + esc(sc.attack.model) +
       " on " + esc(sc.recorded_at.slice(0, 10)) +
       " — nothing here is scripted, and the verdicts are the oracle's own. " +
-      "Pipeline #2, the defense layer and attacks 1, 4 and 5 do not exist yet; " +
-      "the coverage table above says so rather than filling itself in.";
+      "All five attacks and both pipelines are built; the defense layer and the scoring metric are not. " +
+      "Only one checker is validated against hand labels, and the coverage table above says so.";
   }
 
   buildLeds();

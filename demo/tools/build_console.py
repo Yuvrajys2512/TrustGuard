@@ -17,10 +17,10 @@ question "is any of this real?" and the answer has to survive being poked at:
   and the console labels the run id it is playing.
 * The verdicts are the oracle's, copied from the recording — not recomputed and
   certainly not authored. An unvalidated checker stays marked unvalidated.
-* Capability the project does not have yet is drawn as **not built**. The
-  coverage matrix shows two attacks of five and one pipeline of two, because
-  that is what exists; a filled-in matrix would be the one thing in this
-  presentation that lied.
+* Capability is drawn at the level it has actually reached. The coverage
+  matrix marks only one cell as validated; every other cell with runs is
+  "measured", meaning runs exist but no result is claimed, and the one cell
+  that cannot exist is marked out of scope rather than filled in.
 """
 
 from __future__ import annotations
@@ -220,29 +220,28 @@ def _arm(trace: dict, verdict: dict | None) -> dict:
     }
 
 
-#: The Phase 0 taxonomy crossed with the planned pipelines. `state` is the only
+#: The Phase 0 taxonomy crossed with the two pipelines. `state` is the only
 #: field that matters here and it is not decoration: "live" means runs exist and
-#: the console can play them, "built" means the code exists but no result is
-#: claimed, "planned" means it does not exist. Kept in sync by hand with
-#: docs/phase_4_taxonomy_breadth.md §5.
+#: the checker is validated against hand labels, "measured" means runs exist but
+#: the checker is not validated so no result is claimed, "out-of-scope" means the
+#: cell is absent by decision. Kept in sync by hand with docs/matrix_phase4.md.
 MATRIX = {
     "attacks": [
         {"id": "attack1_goal_hijack", "n": 1, "name": "Delegated goal hijacking",
-         "p1": "planned", "p2": "planned"},
+         "p1": "measured", "p2": "measured"},
         {"id": "attack2_role_spoof", "n": 2, "name": "Fabricated authority",
-         "p1": "live", "p2": "planned"},
+         "p1": "live", "p2": "measured"},
         {"id": "attack3_context_poison", "n": 3, "name": "Cross-agent context poisoning",
-         "p1": "built", "p2": "planned"},
+         "p1": "measured", "p2": "measured"},
         {"id": "attack4_priv_escalation", "n": 4, "name": "Cascading privilege escalation",
-         "p1": "blocked", "p2": "planned"},
+         "p1": "out-of-scope", "p2": "measured"},
         {"id": "attack5_tool_laundering", "n": 5, "name": "Silent tool-call laundering",
-         "p1": "planned", "p2": "planned"},
+         "p1": "measured", "p2": "measured"},
     ],
     "notes": {
-        "live": "runs collected, checker validated, result quotable",
-        "built": "probe and checker exist, no runs collected, no result claimed",
-        "blocked": "pipeline #1 has no conditional delegation hop to exploit",
-        "planned": "not started",
+        "live": "runs collected, checker validated against hand labels, result quotable",
+        "measured": "runs collected, checker not yet validated, no result claimed",
+        "out-of-scope": "pipeline #1 records delegations but never enacts them, so the attack cannot be staged: a finding, not a gap",
     },
 }
 

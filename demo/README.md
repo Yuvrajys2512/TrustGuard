@@ -63,14 +63,14 @@ survive being poked at. So:
 2. **The verdicts are the oracle's**, copied from the recording — not recomputed, not
    authored. An unvalidated checker stays visibly marked unvalidated, and attack 3's
    verdict carries that warning.
-3. **Capability the project does not have yet is drawn as not built.** The coverage matrix
-   shows two attacks of five and one pipeline of two, with attack 4 marked blocked and its
-   real reason in the legend. A filled-in matrix would be the one thing on screen that
-   lied.
+3. **Capability is drawn at the level it has reached.** Only one coverage cell is
+   `live` (validated against hand labels). Cells with runs but an unvalidated checker are
+   `measured`, and attack 4 on pipeline #1 is `out-of-scope` with its real reason in the
+   legend. A uniformly green matrix would be the one thing on screen that lied.
 
 The matrix lives in `MATRIX` in `tools/build_console.py` and is kept in sync by hand with
-`docs/phase_4_taxonomy_breadth.md` §5. When attack 3's checker is validated, flip its `p1`
-from `built` to `live` there.
+`docs/matrix_phase4.md`. When a checker is validated, flip its cell from `measured` to
+`live` there and rebuild.
 
 ## Re-recording
 

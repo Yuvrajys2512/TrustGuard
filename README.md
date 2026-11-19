@@ -85,9 +85,10 @@ see [`demo/RUNBOOK.md`](demo/RUNBOOK.md).
 
 ![TrustGuard console replaying attack 2, role spoofing, against the research-assistant pipeline](docs/images/console.png)
 
-> The console is a recorded-run viewer made on 2026-08-26 and is not part of the benchmark.
-> Its coverage table predates attacks 1, 3, 4 and 5 being built; the matrix in
-> [`docs/matrix_phase4.md`](docs/matrix_phase4.md) is the current source.
+> The console is a recorded-run viewer and is not part of the benchmark. Its coverage table
+> mirrors [`docs/matrix_phase4.md`](docs/matrix_phase4.md): only one cell is validated
+> (`LIVE`); cells with runs but an unvalidated checker are `MEASURED`, and attack 4 on
+> pipeline #1 is `OUT-OF-SCOPE` by design.
 
 ## Status
 

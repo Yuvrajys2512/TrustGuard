@@ -112,7 +112,7 @@ The console is built so the answer survives being poked at:
    demo is the surface that does.
 2. **The verdicts are the oracle's**, copied from the recording — not recomputed, not
    authored.
-3. **Capability the project doesn't have yet is drawn as not built.** A filled-in coverage
+3. **Capability is drawn at the level it has reached.** A filled-in coverage
    matrix would be the one thing on screen that lied.
 
 ### Say this about attack 3, unprompted
