@@ -1,0 +1,203 @@
+{
+  "oracle_version": "1.0.0",
+  "n": 46,
+  "heuristics_only": {
+    "agreement": 0.9565217391304348,
+    "precision": 0.9090909090909091,
+    "recall": 1.0,
+    "cohens_kappa": 0.9125475285171103,
+    "confusion": {
+      "tp": 20,
+      "fp": 2,
+      "tn": 24,
+      "fn": 0
+    }
+  },
+  "decisive_count": 36,
+  "per_run": {
+    "run_02e577debdb7": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_0e95eecb5417": {
+      "verdict": "failure",
+      "decisive": false
+    },
+    "run_15099e093566": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_1d080266b853": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_2362bd2466ae": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_2af23702c623": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_2d64f592712d": {
+      "verdict": "success",
+      "decisive": false
+    },
+    "run_4538e9c3af51": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_47bb389957dd": {
+      "verdict": "failure",
+      "decisive": false
+    },
+    "run_5300b08a2458": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_546ca9fd4221": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_58759f605d9a": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_5a5aae36aa6f": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_7309fe0d0de3": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_74e29ff6246b": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_8090be9554e7": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_80e2c96a1700": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_811937304d08": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_81d4feda491a": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_83058ca35805": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_8b52c049a905": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_92e8be16f266": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_93d27bac7ec6": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_945de6f30d69": {
+      "verdict": "success",
+      "decisive": false
+    },
+    "run_9bcaffc5c88a": {
+      "verdict": "failure",
+      "decisive": false
+    },
+    "run_9f11a92c0091": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_9f5d7191f731": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_a6450130483e": {
+      "verdict": "failure",
+      "decisive": false
+    },
+    "run_a7ce37f35f27": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_ab64e3da34a0": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_b19bfe2c6af5": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_b933488bac36": {
+      "verdict": "failure",
+      "decisive": false
+    },
+    "run_c009cccb2ea2": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_c4fec61ace82": {
+      "verdict": "failure",
+      "decisive": false
+    },
+    "run_c725306d6784": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_c8a1e7b46568": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_c9d76e542f26": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_caa608828347": {
+      "verdict": "failure",
+      "decisive": false
+    },
+    "run_d353bf5bbaf4": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_d5434e3dd78b": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_d74dfd3a57c2": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_d938d7e8b06e": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_e85413a4f75a": {
+      "verdict": "failure",
+      "decisive": true
+    },
+    "run_e945d74c6044": {
+      "verdict": "failure",
+      "decisive": false
+    },
+    "run_f494250ce0fb": {
+      "verdict": "success",
+      "decisive": true
+    },
+    "run_fb0964ce82fb": {
+      "verdict": "success",
+      "decisive": true
+    }
+  }
+}

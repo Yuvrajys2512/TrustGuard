@@ -1,0 +1,319 @@
+{
+  "attack_id": "attack3_context_poison",
+  "pipeline": "task_delegation",
+  "pipeline_version": "1.1.0",
+  "shuffle_seed": 20260910,
+  "n": 43,
+  "runs": [
+    {
+      "run_id": "run_0b4d9071c6a9",
+      "trace": "traces\\dev\\run_0b4d9071c6a9.json",
+      "arm": "verification_waiver",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_10567d331f71",
+      "trace": "traces\\dev\\run_10567d331f71.json",
+      "arm": "hedged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_17a07be1f6a5",
+      "trace": "traces\\dev\\run_17a07be1f6a5.json",
+      "arm": "no_poison_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_1a9bc211ea1a",
+      "trace": "traces\\dev\\run_1a9bc211ea1a.json",
+      "arm": "verification_waiver",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_1eba860529e9",
+      "trace": "traces\\dev\\run_1eba860529e9.json",
+      "arm": "verification_waiver",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_227c11c57175",
+      "trace": "traces\\dev\\run_227c11c57175.json",
+      "arm": "provenance_flagged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_27217de944e9",
+      "trace": "traces\\dev\\run_27217de944e9.json",
+      "arm": "channel_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_2923b5b1cfdc",
+      "trace": "traces\\dev\\run_2923b5b1cfdc.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_2cf6127c2a73",
+      "trace": "traces\\dev\\run_2cf6127c2a73.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_2f7f11d0c094",
+      "trace": "traces\\dev\\run_2f7f11d0c094.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_3058827874a5",
+      "trace": "traces\\dev\\run_3058827874a5.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_3233f95b52d1",
+      "trace": "traces\\dev\\run_3233f95b52d1.json",
+      "arm": "provenance_flagged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_325fd3adf9af",
+      "trace": "traces\\dev\\run_325fd3adf9af.json",
+      "arm": "hedged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_421906ae313e",
+      "trace": "traces\\dev\\run_421906ae313e.json",
+      "arm": "no_poison_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_435058c802b7",
+      "trace": "traces\\dev\\run_435058c802b7.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_445bc3c4ecd0",
+      "trace": "traces\\dev\\run_445bc3c4ecd0.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_60800788b864",
+      "trace": "traces\\dev\\run_60800788b864.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_619219ac03ce",
+      "trace": "traces\\dev\\run_619219ac03ce.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_62dbab1f346c",
+      "trace": "traces\\dev\\run_62dbab1f346c.json",
+      "arm": "provenance_flagged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_6745c7250224",
+      "trace": "traces\\dev\\run_6745c7250224.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_7e97ce7b2c3d",
+      "trace": "traces\\dev\\run_7e97ce7b2c3d.json",
+      "arm": "channel_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_7ea87bc73314",
+      "trace": "traces\\dev\\run_7ea87bc73314.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_80347143acb4",
+      "trace": "traces\\dev\\run_80347143acb4.json",
+      "arm": "verification_waiver",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_817882d2cc27",
+      "trace": "traces\\dev\\run_817882d2cc27.json",
+      "arm": "verification_waiver",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_876ce10c2b68",
+      "trace": "traces\\dev\\run_876ce10c2b68.json",
+      "arm": "verification_waiver",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_8b21b0109229",
+      "trace": "traces\\dev\\run_8b21b0109229.json",
+      "arm": "no_poison_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_97719964da1a",
+      "trace": "traces\\dev\\run_97719964da1a.json",
+      "arm": "channel_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_9a556650b2da",
+      "trace": "traces\\dev\\run_9a556650b2da.json",
+      "arm": "hedged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_abba5b4f2fe0",
+      "trace": "traces\\dev\\run_abba5b4f2fe0.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_b4d5201e9956",
+      "trace": "traces\\dev\\run_b4d5201e9956.json",
+      "arm": "verification_waiver",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_bdda62810782",
+      "trace": "traces\\dev\\run_bdda62810782.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_c7e7e706d429",
+      "trace": "traces\\dev\\run_c7e7e706d429.json",
+      "arm": "hedged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_cbdafb8402de",
+      "trace": "traces\\dev\\run_cbdafb8402de.json",
+      "arm": "provenance_flagged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_d14fa178cdc3",
+      "trace": "traces\\dev\\run_d14fa178cdc3.json",
+      "arm": "channel_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_d355af5042c3",
+      "trace": "traces\\dev\\run_d355af5042c3.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_d5adca7d1885",
+      "trace": "traces\\dev\\run_d5adca7d1885.json",
+      "arm": "provenance_flagged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_db5c92080b72",
+      "trace": "traces\\dev\\run_db5c92080b72.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_e0fd04562e98",
+      "trace": "traces\\dev\\run_e0fd04562e98.json",
+      "arm": "survivable_claim",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_e5458d662f51",
+      "trace": "traces\\dev\\run_e5458d662f51.json",
+      "arm": "hedged",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_e93ec4df02f2",
+      "trace": "traces\\dev\\run_e93ec4df02f2.json",
+      "arm": "no_poison_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_ed39331c39fc",
+      "trace": "traces\\dev\\run_ed39331c39fc.json",
+      "arm": "verification_waiver",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_fd4889fd84e3",
+      "trace": "traces\\dev\\run_fd4889fd84e3.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_feb7e4c45412",
+      "trace": "traces\\dev\\run_feb7e4c45412.json",
+      "arm": "channel_control",
+      "pipeline_version": "1.1.0"
+    }
+  ],
+  "order": [
+    28,
+    34,
+    1,
+    9,
+    24,
+    13,
+    38,
+    21,
+    39,
+    27,
+    42,
+    14,
+    6,
+    33,
+    26,
+    3,
+    19,
+    29,
+    18,
+    8,
+    15,
+    2,
+    35,
+    31,
+    17,
+    25,
+    20,
+    30,
+    12,
+    40,
+    37,
+    32,
+    11,
+    5,
+    0,
+    41,
+    36,
+    22,
+    23,
+    10,
+    4,
+    16,
+    7
+  ],
+  "excluded": [
+    {
+      "run_id": "run_9f465dbaafab",
+      "arm": "verification_waiver",
+      "reason": "pipeline_version '1.0.0' != '1.1.0'; not comparable, see decision log 2026-09-09"
+    }
+  ]
+}

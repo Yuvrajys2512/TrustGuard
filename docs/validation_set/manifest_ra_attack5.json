@@ -1,0 +1,180 @@
+{
+  "attack_id": "attack5_tool_laundering",
+  "pipeline": "research_assistant",
+  "pipeline_version": "1.2.0",
+  "not_before": null,
+  "retired_markers": [],
+  "shuffle_seed": 20261008,
+  "n": 20,
+  "runs": [
+    {
+      "run_id": "run_2ad58e4dbc78",
+      "trace": "traces\\dev\\run_2ad58e4dbc78.json",
+      "arm": "launder_explicit",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:59:27.675167+00:00"
+    },
+    {
+      "run_id": "run_2fb870653dfd",
+      "trace": "traces\\dev\\run_2fb870653dfd.json",
+      "arm": "attributed_request",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:56:12.920933+00:00"
+    },
+    {
+      "run_id": "run_315a2e4d835c",
+      "trace": "traces\\dev\\run_315a2e4d835c.json",
+      "arm": "no_launder_control",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-13T11:01:01.648662+00:00"
+    },
+    {
+      "run_id": "run_4b0e836cbd82",
+      "trace": "traces\\dev\\run_4b0e836cbd82.json",
+      "arm": "launder_explicit",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:57:43.295818+00:00"
+    },
+    {
+      "run_id": "run_73c978f587c7",
+      "trace": "traces\\dev\\run_73c978f587c7.json",
+      "arm": "permission_gap_named",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T16:00:14.568135+00:00"
+    },
+    {
+      "run_id": "run_7c298e336be4",
+      "trace": "traces\\dev\\run_7c298e336be4.json",
+      "arm": "attributed_request",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:55:29.651525+00:00"
+    },
+    {
+      "run_id": "run_91e41d9ff686",
+      "trace": "traces\\dev\\run_91e41d9ff686.json",
+      "arm": "plain_request",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:54:33.420978+00:00"
+    },
+    {
+      "run_id": "run_931ecae243b0",
+      "trace": "traces\\dev\\run_931ecae243b0.json",
+      "arm": "plain_request",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:54:57.111666+00:00"
+    },
+    {
+      "run_id": "run_98bd0927d83f",
+      "trace": "traces\\dev\\run_98bd0927d83f.json",
+      "arm": "no_launder_control",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T16:03:07.879593+00:00"
+    },
+    {
+      "run_id": "run_aa070d14f907",
+      "trace": "traces\\dev\\run_aa070d14f907.json",
+      "arm": "launder_explicit",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:58:40.751384+00:00"
+    },
+    {
+      "run_id": "run_ad4f7da6afe8",
+      "trace": "traces\\dev\\run_ad4f7da6afe8.json",
+      "arm": "permission_gap_named",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T16:00:59.657978+00:00"
+    },
+    {
+      "run_id": "run_b5d4bfd0ae94",
+      "trace": "traces\\dev\\run_b5d4bfd0ae94.json",
+      "arm": "launder_explicit",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-13T10:59:08.903470+00:00"
+    },
+    {
+      "run_id": "run_bf3041aac30e",
+      "trace": "traces\\dev\\run_bf3041aac30e.json",
+      "arm": "permission_gap_named",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T16:01:48.577890+00:00"
+    },
+    {
+      "run_id": "run_c6b739fc8863",
+      "trace": "traces\\dev\\run_c6b739fc8863.json",
+      "arm": "attributed_request",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:56:51.958920+00:00"
+    },
+    {
+      "run_id": "run_dcaa76e9100a",
+      "trace": "traces\\dev\\run_dcaa76e9100a.json",
+      "arm": "no_launder_control",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T16:03:41.740812+00:00"
+    },
+    {
+      "run_id": "run_ddb824dd180f",
+      "trace": "traces\\dev\\run_ddb824dd180f.json",
+      "arm": "no_launder_control",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T16:02:41.120267+00:00"
+    },
+    {
+      "run_id": "run_e4613a0ee0bf",
+      "trace": "traces\\dev\\run_e4613a0ee0bf.json",
+      "arm": "plain_request",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-13T10:58:25.183395+00:00"
+    },
+    {
+      "run_id": "run_e7ad3e6afdc2",
+      "trace": "traces\\dev\\run_e7ad3e6afdc2.json",
+      "arm": "attributed_request",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-13T10:58:36.950844+00:00"
+    },
+    {
+      "run_id": "run_fd5a1dc96004",
+      "trace": "traces\\dev\\run_fd5a1dc96004.json",
+      "arm": "plain_request",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-18T15:54:45.244538+00:00"
+    },
+    {
+      "run_id": "run_ff26988b5aca",
+      "trace": "traces\\dev\\run_ff26988b5aca.json",
+      "arm": "permission_gap_named",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-13T11:03:06.214512+00:00"
+    }
+  ],
+  "order": [
+    8,
+    2,
+    16,
+    0,
+    19,
+    5,
+    10,
+    13,
+    6,
+    12,
+    17,
+    3,
+    11,
+    18,
+    15,
+    4,
+    7,
+    14,
+    1,
+    9
+  ],
+  "excluded": [
+    {
+      "run_id": "run_6eebdc1dabe6",
+      "arm": "permission_gap_named",
+      "reason": "run errored: RuntimeError: All 3 backend(s) failed after 6 attempts. Last error: Error code: 429 - {'error': {'message': \"Request too"
+    }
+  ]
+}

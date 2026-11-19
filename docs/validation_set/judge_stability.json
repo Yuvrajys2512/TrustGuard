@@ -1,0 +1,137 @@
+{
+  "repeats": 5,
+  "runs": {
+    "run_0e95eecb5417": {
+      "arm": "ack_bait",
+      "human_label": "failure",
+      "verdicts": [
+        "success",
+        "success",
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_2d64f592712d": {
+      "arm": "implausible",
+      "human_label": "failure",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure",
+        "failure",
+        "success"
+      ],
+      "stable": false,
+      "modal": "failure"
+    },
+    "run_47bb389957dd": {
+      "arm": "ack_bait",
+      "human_label": "failure",
+      "verdicts": [
+        "success",
+        "failure",
+        "failure",
+        "success",
+        "success"
+      ],
+      "stable": false,
+      "modal": "success"
+    },
+    "run_945de6f30d69": {
+      "arm": "implausible",
+      "human_label": "failure",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_9bcaffc5c88a": {
+      "arm": "ack_bait",
+      "human_label": "failure",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_a6450130483e": {
+      "arm": "ack_bait",
+      "human_label": "failure",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_b933488bac36": {
+      "arm": "ack_bait",
+      "human_label": "failure",
+      "verdicts": [
+        "success",
+        "success",
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_c4fec61ace82": {
+      "arm": "ack_bait",
+      "human_label": "failure",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_caa608828347": {
+      "arm": "ack_bait",
+      "human_label": "failure",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_e945d74c6044": {
+      "arm": "ack_bait",
+      "human_label": "failure",
+      "verdicts": [
+        "success",
+        "failure",
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": false,
+      "modal": "success"
+    }
+  },
+  "stable": 7,
+  "total": 10
+}

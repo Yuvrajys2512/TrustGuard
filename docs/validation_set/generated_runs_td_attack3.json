@@ -1,0 +1,217 @@
+[
+  {
+    "run_id": "run_80347143acb4",
+    "arm": "verification_waiver",
+    "trace": "traces\\dev\\run_80347143acb4.json"
+  },
+  {
+    "run_id": "run_817882d2cc27",
+    "arm": "verification_waiver",
+    "trace": "traces\\dev\\run_817882d2cc27.json"
+  },
+  {
+    "run_id": "run_876ce10c2b68",
+    "arm": "verification_waiver",
+    "trace": "traces\\dev\\run_876ce10c2b68.json"
+  },
+  {
+    "run_id": "run_1a9bc211ea1a",
+    "arm": "verification_waiver",
+    "trace": "traces\\dev\\run_1a9bc211ea1a.json"
+  },
+  {
+    "run_id": "run_b4d5201e9956",
+    "arm": "verification_waiver",
+    "trace": "traces\\dev\\run_b4d5201e9956.json"
+  },
+  {
+    "run_id": "run_ed39331c39fc",
+    "arm": "verification_waiver",
+    "trace": "traces\\dev\\run_ed39331c39fc.json"
+  },
+  {
+    "run_id": "run_1eba860529e9",
+    "arm": "verification_waiver",
+    "trace": "traces\\dev\\run_1eba860529e9.json"
+  },
+  {
+    "run_id": "run_0b4d9071c6a9",
+    "arm": "verification_waiver",
+    "trace": "traces\\dev\\run_0b4d9071c6a9.json"
+  },
+  {
+    "run_id": "run_6745c7250224",
+    "arm": "full",
+    "trace": "traces\\dev\\run_6745c7250224.json"
+  },
+  {
+    "run_id": "run_2cf6127c2a73",
+    "arm": "full",
+    "trace": "traces\\dev\\run_2cf6127c2a73.json"
+  },
+  {
+    "run_id": "run_2f7f11d0c094",
+    "arm": "full",
+    "trace": "traces\\dev\\run_2f7f11d0c094.json"
+  },
+  {
+    "run_id": "run_bdda62810782",
+    "arm": "full",
+    "trace": "traces\\dev\\run_bdda62810782.json"
+  },
+  {
+    "run_id": "run_db5c92080b72",
+    "arm": "full",
+    "trace": "traces\\dev\\run_db5c92080b72.json"
+  },
+  {
+    "run_id": "run_fd4889fd84e3",
+    "arm": "full",
+    "trace": "traces\\dev\\run_fd4889fd84e3.json"
+  },
+  {
+    "run_id": "run_9a556650b2da",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_9a556650b2da.json"
+  },
+  {
+    "run_id": "run_10567d331f71",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_10567d331f71.json"
+  },
+  {
+    "run_id": "run_c7e7e706d429",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_c7e7e706d429.json"
+  },
+  {
+    "run_id": "run_325fd3adf9af",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_325fd3adf9af.json"
+  },
+  {
+    "run_id": "run_e5458d662f51",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_e5458d662f51.json"
+  },
+  {
+    "run_id": "run_3233f95b52d1",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_3233f95b52d1.json"
+  },
+  {
+    "run_id": "run_d5adca7d1885",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_d5adca7d1885.json"
+  },
+  {
+    "run_id": "run_cbdafb8402de",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_cbdafb8402de.json"
+  },
+  {
+    "run_id": "run_227c11c57175",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_227c11c57175.json"
+  },
+  {
+    "run_id": "run_62dbab1f346c",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_62dbab1f346c.json"
+  },
+  {
+    "run_id": "run_7e97ce7b2c3d",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_7e97ce7b2c3d.json"
+  },
+  {
+    "run_id": "run_feb7e4c45412",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_feb7e4c45412.json"
+  },
+  {
+    "run_id": "run_d14fa178cdc3",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_d14fa178cdc3.json"
+  },
+  {
+    "run_id": "run_27217de944e9",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_27217de944e9.json"
+  },
+  {
+    "run_id": "run_97719964da1a",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_97719964da1a.json"
+  },
+  {
+    "run_id": "run_421906ae313e",
+    "arm": "no_poison_control",
+    "trace": "traces\\dev\\run_421906ae313e.json"
+  },
+  {
+    "run_id": "run_e93ec4df02f2",
+    "arm": "no_poison_control",
+    "trace": "traces\\dev\\run_e93ec4df02f2.json"
+  },
+  {
+    "run_id": "run_17a07be1f6a5",
+    "arm": "no_poison_control",
+    "trace": "traces\\dev\\run_17a07be1f6a5.json"
+  },
+  {
+    "run_id": "run_8b21b0109229",
+    "arm": "no_poison_control",
+    "trace": "traces\\dev\\run_8b21b0109229.json"
+  },
+  {
+    "run_id": "run_619219ac03ce",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_619219ac03ce.json"
+  },
+  {
+    "run_id": "run_7ea87bc73314",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_7ea87bc73314.json"
+  },
+  {
+    "run_id": "run_435058c802b7",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_435058c802b7.json"
+  },
+  {
+    "run_id": "run_2923b5b1cfdc",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_2923b5b1cfdc.json"
+  },
+  {
+    "run_id": "run_60800788b864",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_60800788b864.json"
+  },
+  {
+    "run_id": "run_abba5b4f2fe0",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_abba5b4f2fe0.json"
+  },
+  {
+    "run_id": "run_e0fd04562e98",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_e0fd04562e98.json"
+  },
+  {
+    "run_id": "run_445bc3c4ecd0",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_445bc3c4ecd0.json"
+  },
+  {
+    "run_id": "run_3058827874a5",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_3058827874a5.json"
+  },
+  {
+    "run_id": "run_d355af5042c3",
+    "arm": "survivable_claim",
+    "trace": "traces\\dev\\run_d355af5042c3.json"
+  }
+]

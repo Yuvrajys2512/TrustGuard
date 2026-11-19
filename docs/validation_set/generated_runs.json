@@ -1,0 +1,177 @@
+[
+  {
+    "run_id": "run_d74dfd3a57c2",
+    "arm": "full",
+    "trace": "traces\\run_d74dfd3a57c2.json"
+  },
+  {
+    "run_id": "run_1d080266b853",
+    "arm": "full",
+    "trace": "traces\\run_1d080266b853.json"
+  },
+  {
+    "run_id": "run_d5434e3dd78b",
+    "arm": "full",
+    "trace": "traces\\run_d5434e3dd78b.json"
+  },
+  {
+    "run_id": "run_d938d7e8b06e",
+    "arm": "hedged",
+    "trace": "traces\\run_d938d7e8b06e.json"
+  },
+  {
+    "run_id": "run_c9d76e542f26",
+    "arm": "hedged",
+    "trace": "traces\\run_c9d76e542f26.json"
+  },
+  {
+    "run_id": "run_83058ca35805",
+    "arm": "hedged",
+    "trace": "traces\\run_83058ca35805.json"
+  },
+  {
+    "run_id": "run_2af23702c623",
+    "arm": "hedged",
+    "trace": "traces\\run_2af23702c623.json"
+  },
+  {
+    "run_id": "run_f494250ce0fb",
+    "arm": "hedged",
+    "trace": "traces\\run_f494250ce0fb.json"
+  },
+  {
+    "run_id": "run_a7ce37f35f27",
+    "arm": "hedged",
+    "trace": "traces\\run_a7ce37f35f27.json"
+  },
+  {
+    "run_id": "run_2d64f592712d",
+    "arm": "implausible",
+    "trace": "traces\\run_2d64f592712d.json"
+  },
+  {
+    "run_id": "run_02e577debdb7",
+    "arm": "implausible",
+    "trace": "traces\\run_02e577debdb7.json"
+  },
+  {
+    "run_id": "run_2362bd2466ae",
+    "arm": "implausible",
+    "trace": "traces\\run_2362bd2466ae.json"
+  },
+  {
+    "run_id": "run_945de6f30d69",
+    "arm": "implausible",
+    "trace": "traces\\run_945de6f30d69.json"
+  },
+  {
+    "run_id": "run_9f5d7191f731",
+    "arm": "implausible",
+    "trace": "traces\\run_9f5d7191f731.json"
+  },
+  {
+    "run_id": "run_c009cccb2ea2",
+    "arm": "implausible",
+    "trace": "traces\\run_c009cccb2ea2.json"
+  },
+  {
+    "run_id": "run_81d4feda491a",
+    "arm": "plausible_filename",
+    "trace": "traces\\run_81d4feda491a.json"
+  },
+  {
+    "run_id": "run_92e8be16f266",
+    "arm": "plausible_filename",
+    "trace": "traces\\run_92e8be16f266.json"
+  },
+  {
+    "run_id": "run_74e29ff6246b",
+    "arm": "plausible_filename",
+    "trace": "traces\\run_74e29ff6246b.json"
+  },
+  {
+    "run_id": "run_8090be9554e7",
+    "arm": "plausible_filename",
+    "trace": "traces\\run_8090be9554e7.json"
+  },
+  {
+    "run_id": "run_811937304d08",
+    "arm": "plausible_filename",
+    "trace": "traces\\run_811937304d08.json"
+  },
+  {
+    "run_id": "run_c8a1e7b46568",
+    "arm": "plausible_filename",
+    "trace": "traces\\run_c8a1e7b46568.json"
+  },
+  {
+    "run_id": "run_e945d74c6044",
+    "arm": "ack_bait",
+    "trace": "traces\\run_e945d74c6044.json"
+  },
+  {
+    "run_id": "run_0e95eecb5417",
+    "arm": "ack_bait",
+    "trace": "traces\\run_0e95eecb5417.json"
+  },
+  {
+    "run_id": "run_a6450130483e",
+    "arm": "ack_bait",
+    "trace": "traces\\run_a6450130483e.json"
+  },
+  {
+    "run_id": "run_47bb389957dd",
+    "arm": "ack_bait",
+    "trace": "traces\\run_47bb389957dd.json"
+  },
+  {
+    "run_id": "run_caa608828347",
+    "arm": "ack_bait",
+    "trace": "traces\\run_caa608828347.json"
+  },
+  {
+    "run_id": "run_c4fec61ace82",
+    "arm": "ack_bait",
+    "trace": "traces\\run_c4fec61ace82.json"
+  },
+  {
+    "run_id": "run_b933488bac36",
+    "arm": "ack_bait",
+    "trace": "traces\\run_b933488bac36.json"
+  },
+  {
+    "run_id": "run_c725306d6784",
+    "arm": "no_authority_control",
+    "trace": "traces\\run_c725306d6784.json"
+  },
+  {
+    "run_id": "run_5300b08a2458",
+    "arm": "no_authority_control",
+    "trace": "traces\\run_5300b08a2458.json"
+  },
+  {
+    "run_id": "run_e85413a4f75a",
+    "arm": "no_authority_control",
+    "trace": "traces\\run_e85413a4f75a.json"
+  },
+  {
+    "run_id": "run_7309fe0d0de3",
+    "arm": "no_authority_control",
+    "trace": "traces\\run_7309fe0d0de3.json"
+  },
+  {
+    "run_id": "run_4538e9c3af51",
+    "arm": "no_authority_control",
+    "trace": "traces\\run_4538e9c3af51.json"
+  },
+  {
+    "run_id": "run_b19bfe2c6af5",
+    "arm": "no_authority_control",
+    "trace": "traces\\run_b19bfe2c6af5.json"
+  },
+  {
+    "run_id": "run_15099e093566",
+    "arm": "benign",
+    "trace": "traces\\run_15099e093566.json"
+  }
+]

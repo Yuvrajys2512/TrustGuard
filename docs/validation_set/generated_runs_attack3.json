@@ -1,0 +1,172 @@
+[
+  {
+    "run_id": "run_28b666550f9d",
+    "arm": "full",
+    "trace": "traces\\dev\\run_28b666550f9d.json"
+  },
+  {
+    "run_id": "run_3fa2e8cda142",
+    "arm": "full",
+    "trace": "traces\\dev\\run_3fa2e8cda142.json"
+  },
+  {
+    "run_id": "run_08049ecc3fe6",
+    "arm": "full",
+    "trace": "traces\\dev\\run_08049ecc3fe6.json"
+  },
+  {
+    "run_id": "run_1ded7f9d9027",
+    "arm": "full",
+    "trace": "traces\\dev\\run_1ded7f9d9027.json"
+  },
+  {
+    "run_id": "run_277d9c99a376",
+    "arm": "filing_convention",
+    "trace": "traces\\dev\\run_277d9c99a376.json"
+  },
+  {
+    "run_id": "run_a0908b6b4ca8",
+    "arm": "filing_convention",
+    "trace": "traces\\dev\\run_a0908b6b4ca8.json"
+  },
+  {
+    "run_id": "run_a20a26c581a6",
+    "arm": "filing_convention",
+    "trace": "traces\\dev\\run_a20a26c581a6.json"
+  },
+  {
+    "run_id": "run_e4e809310535",
+    "arm": "filing_convention",
+    "trace": "traces\\dev\\run_e4e809310535.json"
+  },
+  {
+    "run_id": "run_3e2b32de3979",
+    "arm": "filing_convention",
+    "trace": "traces\\dev\\run_3e2b32de3979.json"
+  },
+  {
+    "run_id": "run_14c53299917d",
+    "arm": "filing_convention",
+    "trace": "traces\\dev\\run_14c53299917d.json"
+  },
+  {
+    "run_id": "run_6f468848b487",
+    "arm": "filing_convention",
+    "trace": "traces\\dev\\run_6f468848b487.json"
+  },
+  {
+    "run_id": "run_c8ea84790928",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_c8ea84790928.json"
+  },
+  {
+    "run_id": "run_b6387cbd4a19",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_b6387cbd4a19.json"
+  },
+  {
+    "run_id": "run_9fa33afc9c82",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_9fa33afc9c82.json"
+  },
+  {
+    "run_id": "run_c41cbe53ca1c",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_c41cbe53ca1c.json"
+  },
+  {
+    "run_id": "run_58e4d02a9cae",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_58e4d02a9cae.json"
+  },
+  {
+    "run_id": "run_83278e3f66d2",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_83278e3f66d2.json"
+  },
+  {
+    "run_id": "run_7e2dee47a1ad",
+    "arm": "hedged",
+    "trace": "traces\\dev\\run_7e2dee47a1ad.json"
+  },
+  {
+    "run_id": "run_42683ba624bf",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_42683ba624bf.json"
+  },
+  {
+    "run_id": "run_5f7350970070",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_5f7350970070.json"
+  },
+  {
+    "run_id": "run_e7e199b3f261",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_e7e199b3f261.json"
+  },
+  {
+    "run_id": "run_0b73f1222036",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_0b73f1222036.json"
+  },
+  {
+    "run_id": "run_265532bbe068",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_265532bbe068.json"
+  },
+  {
+    "run_id": "run_f4742bc303ef",
+    "arm": "provenance_flagged",
+    "trace": "traces\\dev\\run_f4742bc303ef.json"
+  },
+  {
+    "run_id": "run_53e5af14a80f",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_53e5af14a80f.json"
+  },
+  {
+    "run_id": "run_80d06dfdc7fe",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_80d06dfdc7fe.json"
+  },
+  {
+    "run_id": "run_a1f3498ec38e",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_a1f3498ec38e.json"
+  },
+  {
+    "run_id": "run_2c572ab37b72",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_2c572ab37b72.json"
+  },
+  {
+    "run_id": "run_25f59fb23d33",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_25f59fb23d33.json"
+  },
+  {
+    "run_id": "run_09b26712de8d",
+    "arm": "channel_control",
+    "trace": "traces\\dev\\run_09b26712de8d.json"
+  },
+  {
+    "run_id": "run_6c5adc2b4a26",
+    "arm": "no_poison_control",
+    "trace": "traces\\dev\\run_6c5adc2b4a26.json"
+  },
+  {
+    "run_id": "run_2c87c5387355",
+    "arm": "no_poison_control",
+    "trace": "traces\\dev\\run_2c87c5387355.json"
+  },
+  {
+    "run_id": "run_d0841a99bb54",
+    "arm": "no_poison_control",
+    "trace": "traces\\dev\\run_d0841a99bb54.json"
+  },
+  {
+    "run_id": "run_4f8065a24a53",
+    "arm": "no_poison_control",
+    "trace": "traces\\dev\\run_4f8065a24a53.json"
+  }
+]

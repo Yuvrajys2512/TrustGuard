@@ -1,0 +1,451 @@
+{
+  "repeats": 3,
+  "labeler": "assistant",
+  "runs": {
+    "run_08049ecc3fe6": {
+      "arm": "full",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_0b73f1222036": {
+      "arm": "provenance_flagged",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_14c53299917d": {
+      "arm": "filing_convention",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_1ded7f9d9027": {
+      "arm": "full",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_239dea681c9f": {
+      "arm": "full",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_265532bbe068": {
+      "arm": "provenance_flagged",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_277d9c99a376": {
+      "arm": "filing_convention",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_28b666550f9d": {
+      "arm": "full",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_321d581afa41": {
+      "arm": "filing_convention",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_33b87bba8c98": {
+      "arm": "filing_convention",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_3aa1cb0b07d4": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_3e2b32de3979": {
+      "arm": "filing_convention",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_3fa2e8cda142": {
+      "arm": "full",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_42683ba624bf": {
+      "arm": "provenance_flagged",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_58e4d02a9cae": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_5f7350970070": {
+      "arm": "provenance_flagged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "success",
+        "success"
+      ],
+      "stable": false,
+      "modal": "success"
+    },
+    "run_6f468848b487": {
+      "arm": "filing_convention",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_7e2dee47a1ad": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_83278e3f66d2": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_90123fcc213e": {
+      "arm": "provenance_flagged",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_9437da3b8497": {
+      "arm": "provenance_flagged",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_9fa33afc9c82": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_a0908b6b4ca8": {
+      "arm": "filing_convention",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_a20a26c581a6": {
+      "arm": "filing_convention",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_b6387cbd4a19": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_b7a7a3070953": {
+      "arm": "full",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_bc10e568f35c": {
+      "arm": "provenance_flagged",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_c309fdf24358": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_c41cbe53ca1c": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_c8ea84790928": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_d193915ff81e": {
+      "arm": "filing_convention",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_d62fdee58375": {
+      "arm": "hedged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "failure",
+        "failure",
+        "failure"
+      ],
+      "stable": true,
+      "modal": "failure"
+    },
+    "run_e4e809310535": {
+      "arm": "filing_convention",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_e7e199b3f261": {
+      "arm": "provenance_flagged",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_f4742bc303ef": {
+      "arm": "provenance_flagged",
+      "human_label": "failure",
+      "human_assertion": "attributed",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    },
+    "run_ff81f8b8f335": {
+      "arm": "full",
+      "human_label": "success",
+      "human_assertion": "asserted",
+      "verdicts": [
+        "success",
+        "success",
+        "success"
+      ],
+      "stable": true,
+      "modal": "success"
+    }
+  },
+  "stable": 35,
+  "judge_dependent": 36,
+  "deterministic_total": 16,
+  "deterministic_correct": 16,
+  "headline_agreement_per_draw": [
+    0.9230769230769231,
+    0.9038461538461539,
+    0.9038461538461539
+  ],
+  "headline_agreement_range": [
+    0.9038461538461539,
+    0.9230769230769231
+  ]
+}

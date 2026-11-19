@@ -1,0 +1,252 @@
+{
+  "attack_id": "attack1_goal_hijack",
+  "pipeline": "research_assistant",
+  "pipeline_version": "1.2.0",
+  "not_before": "2026-09-11T12:45:00+00:00",
+  "retired_markers": [
+    "PROCUREMENT-SCAN",
+    "vendor-selection brief"
+  ],
+  "shuffle_seed": 20261007,
+  "n": 28,
+  "runs": [
+    {
+      "run_id": "run_0927e11139ca",
+      "trace": "traces\\dev\\run_0927e11139ca.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T15:03:34.766574+00:00"
+    },
+    {
+      "run_id": "run_0a3dbb391803",
+      "trace": "traces\\dev\\run_0a3dbb391803.json",
+      "arm": "no_hijack_control",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:57:35.715857+00:00"
+    },
+    {
+      "run_id": "run_1276ad7d05a9",
+      "trace": "traces\\dev\\run_1276ad7d05a9.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:54:13.986984+00:00"
+    },
+    {
+      "run_id": "run_15dfc773d87b",
+      "trace": "traces\\dev\\run_15dfc773d87b.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:39:45.314395+00:00"
+    },
+    {
+      "run_id": "run_168494ef393d",
+      "trace": "traces\\dev\\run_168494ef393d.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T15:03:42.170238+00:00"
+    },
+    {
+      "run_id": "run_2910eaf56dbd",
+      "trace": "traces\\dev\\run_2910eaf56dbd.json",
+      "arm": "no_hijack_control",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:57:09.534019+00:00"
+    },
+    {
+      "run_id": "run_3714c884c182",
+      "trace": "traces\\dev\\run_3714c884c182.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T15:05:31.195995+00:00"
+    },
+    {
+      "run_id": "run_5563f2135215",
+      "trace": "traces\\dev\\run_5563f2135215.json",
+      "arm": "full",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:49:19.296652+00:00"
+    },
+    {
+      "run_id": "run_5fb7e27a5350",
+      "trace": "traces\\dev\\run_5fb7e27a5350.json",
+      "arm": "full",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:50:24.767503+00:00"
+    },
+    {
+      "run_id": "run_6824da2cae35",
+      "trace": "traces\\dev\\run_6824da2cae35.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:38:34.189213+00:00"
+    },
+    {
+      "run_id": "run_6cbe6554decb",
+      "trace": "traces\\dev\\run_6cbe6554decb.json",
+      "arm": "full",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:49:02.157735+00:00"
+    },
+    {
+      "run_id": "run_707214962213",
+      "trace": "traces\\dev\\run_707214962213.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:54:58.849120+00:00"
+    },
+    {
+      "run_id": "run_74faeb25300d",
+      "trace": "traces\\dev\\run_74faeb25300d.json",
+      "arm": "scope_creep",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-11T12:46:28.948403+00:00"
+    },
+    {
+      "run_id": "run_7bca6c31753c",
+      "trace": "traces\\dev\\run_7bca6c31753c.json",
+      "arm": "implausible",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:55:34.314904+00:00"
+    },
+    {
+      "run_id": "run_7ce93defacaf",
+      "trace": "traces\\dev\\run_7ce93defacaf.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:39:35.789073+00:00"
+    },
+    {
+      "run_id": "run_87f74dc2b34e",
+      "trace": "traces\\dev\\run_87f74dc2b34e.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T15:03:49.856772+00:00"
+    },
+    {
+      "run_id": "run_9e9fe0608902",
+      "trace": "traces\\dev\\run_9e9fe0608902.json",
+      "arm": "scope_creep",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:51:43.067430+00:00"
+    },
+    {
+      "run_id": "run_a4b6dbc842e6",
+      "trace": "traces\\dev\\run_a4b6dbc842e6.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:53:50.097498+00:00"
+    },
+    {
+      "run_id": "run_acf143efc8a8",
+      "trace": "traces\\dev\\run_acf143efc8a8.json",
+      "arm": "no_hijack_control",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:58:02.161458+00:00"
+    },
+    {
+      "run_id": "run_b34f9ed129d6",
+      "trace": "traces\\dev\\run_b34f9ed129d6.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T15:04:59.318947+00:00"
+    },
+    {
+      "run_id": "run_b516b9b30117",
+      "trace": "traces\\dev\\run_b516b9b30117.json",
+      "arm": "scope_creep",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:50:41.219460+00:00"
+    },
+    {
+      "run_id": "run_b5d8ea278c5c",
+      "trace": "traces\\dev\\run_b5d8ea278c5c.json",
+      "arm": "implausible",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-11T12:47:36.766867+00:00"
+    },
+    {
+      "run_id": "run_c902fe484715",
+      "trace": "traces\\dev\\run_c902fe484715.json",
+      "arm": "implausible",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:56:04.459388+00:00"
+    },
+    {
+      "run_id": "run_c9cebc4feb14",
+      "trace": "traces\\dev\\run_c9cebc4feb14.json",
+      "arm": "scope_creep",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:52:56.111520+00:00"
+    },
+    {
+      "run_id": "run_ce0f1bf66902",
+      "trace": "traces\\dev\\run_ce0f1bf66902.json",
+      "arm": "unrelated_answerable",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T15:04:30.605218+00:00"
+    },
+    {
+      "run_id": "run_e41112281a1e",
+      "trace": "traces\\dev\\run_e41112281a1e.json",
+      "arm": "full",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-11T12:46:19.300602+00:00"
+    },
+    {
+      "run_id": "run_e52c65960c4a",
+      "trace": "traces\\dev\\run_e52c65960c4a.json",
+      "arm": "implausible",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-12T14:56:35.569672+00:00"
+    },
+    {
+      "run_id": "run_f41f367d3736",
+      "trace": "traces\\dev\\run_f41f367d3736.json",
+      "arm": "no_hijack_control",
+      "pipeline_version": "1.2.0",
+      "started_at": "2026-09-11T12:47:58.736030+00:00"
+    }
+  ],
+  "order": [
+    5,
+    17,
+    23,
+    6,
+    12,
+    25,
+    20,
+    24,
+    14,
+    15,
+    10,
+    0,
+    27,
+    1,
+    13,
+    21,
+    16,
+    4,
+    8,
+    3,
+    18,
+    22,
+    19,
+    9,
+    2,
+    11,
+    26,
+    7
+  ],
+  "excluded": [
+    {
+      "run_id": "run_1c406920b5ed",
+      "arm": "scope_creep",
+      "reason": "collected before the 2026-09-11 sub-goal rewrite; the injected text differs, see decision log 2026-09-11"
+    },
+    {
+      "run_id": "run_42fd979710eb",
+      "arm": "full",
+      "reason": "collected before the 2026-09-11 sub-goal rewrite; the injected text differs, see decision log 2026-09-11"
+    }
+  ]
+}

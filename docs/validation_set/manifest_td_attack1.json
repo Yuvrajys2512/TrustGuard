@@ -1,0 +1,124 @@
+{
+  "attack_id": "attack1_goal_hijack",
+  "pipeline": "task_delegation",
+  "pipeline_version": "1.1.0",
+  "shuffle_seed": 20261006,
+  "n": 13,
+  "runs": [
+    {
+      "run_id": "run_01bb5c7a8b90",
+      "trace": "traces\\dev\\run_01bb5c7a8b90.json",
+      "arm": "implausible",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_0ac6ebb393d1",
+      "trace": "traces\\dev\\run_0ac6ebb393d1.json",
+      "arm": "scope_creep",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_0d2fb233db1a",
+      "trace": "traces\\dev\\run_0d2fb233db1a.json",
+      "arm": "no_hijack_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_0de96ee173cd",
+      "trace": "traces\\dev\\run_0de96ee173cd.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_267d780f4fbe",
+      "trace": "traces\\dev\\run_267d780f4fbe.json",
+      "arm": "scope_creep",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_68447eea4373",
+      "trace": "traces\\dev\\run_68447eea4373.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_689bde1be7ae",
+      "trace": "traces\\dev\\run_689bde1be7ae.json",
+      "arm": "no_hijack_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_7c2ee07c88cd",
+      "trace": "traces\\dev\\run_7c2ee07c88cd.json",
+      "arm": "scope_creep",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_a0e213bcdda3",
+      "trace": "traces\\dev\\run_a0e213bcdda3.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_b820821f12e0",
+      "trace": "traces\\dev\\run_b820821f12e0.json",
+      "arm": "no_hijack_control",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_c36839604bac",
+      "trace": "traces\\dev\\run_c36839604bac.json",
+      "arm": "implausible",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_c5b128ea8177",
+      "trace": "traces\\dev\\run_c5b128ea8177.json",
+      "arm": "full",
+      "pipeline_version": "1.1.0"
+    },
+    {
+      "run_id": "run_d018a62cf62d",
+      "trace": "traces\\dev\\run_d018a62cf62d.json",
+      "arm": "implausible",
+      "pipeline_version": "1.1.0"
+    }
+  ],
+  "order": [
+    5,
+    2,
+    12,
+    0,
+    11,
+    8,
+    6,
+    3,
+    9,
+    4,
+    10,
+    1,
+    7
+  ],
+  "excluded": [
+    {
+      "run_id": "run_2cb54c5c11fc",
+      "arm": "full",
+      "reason": "collected before the 2026-09-12 scope-label recoining; the injected text differs, see decision log 2026-09-12"
+    },
+    {
+      "run_id": "run_70a7247c909c",
+      "arm": "no_hijack_control",
+      "reason": "collected before the 2026-09-12 scope-label recoining; the injected text differs, see decision log 2026-09-12"
+    },
+    {
+      "run_id": "run_bb00f0ec3f24",
+      "arm": "implausible",
+      "reason": "collected before the 2026-09-12 scope-label recoining; the injected text differs, see decision log 2026-09-12"
+    },
+    {
+      "run_id": "run_c5f243264505",
+      "arm": "scope_creep",
+      "reason": "collected before the 2026-09-12 scope-label recoining; the injected text differs, see decision log 2026-09-12"
+    }
+  ]
+}
