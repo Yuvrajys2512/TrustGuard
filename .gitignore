@@ -1,0 +1,28 @@
+# Secrets - never commit API keys
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# Run artifacts. The traces committed here are the evidence cited by
+# docs/validation_set/. Scratch output from your own runs lands in a new
+# subfolder or the lanes below and should stay out of git - see traces/README.md.
+traces/paper/*
+!traces/paper/.gitkeep
+workspace/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

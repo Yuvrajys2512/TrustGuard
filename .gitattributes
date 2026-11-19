@@ -1,0 +1,5 @@
+* text=auto
+*.json linguist-generated=false
+docs/validation_set/** linguist-documentation
+traces/** linguist-generated
+demo/*.html linguist-generated
