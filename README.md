@@ -18,7 +18,7 @@ another agent it is supposed to collaborate with.
 
 ## Contents
 
-- [What is in the box](#what-is-in-the-box)
+- [What is in the box](#what-is-in-the-box) and [architecture](#architecture)
 - [Status](#status) and [What has been measured](#what-has-been-measured)
 - [Setup](#setup)
 - [Running a target pipeline](#running-a-target-pipeline) and [an attack](#running-an-attack)
@@ -39,6 +39,41 @@ another agent it is supposed to collaborate with.
 - **A hybrid oracle** (deterministic heuristics plus an LLM judge) that reports its own
   reliability, with a `validated` flag stamped on every verdict.
 - **A 5x2 attack-by-pipeline matrix** generated from run artefacts.
+
+## Architecture
+
+The harness is layered so that no layer grades its own output. A probe may change what a
+message *claims* to be from, or a memory write's value and provenance, but never the agent
+that actually sent or wrote it; the oracle reads exactly that gap.
+
+```mermaid
+flowchart LR
+    P["Probe engine<br/>5 attacks, matched controls"] -->|inject| T
+    subgraph T["Target pipeline (LangGraph)"]
+        direction TB
+        MB["Message bus"]
+        SM["Shared memory"]
+        TR["Permission-enforcing<br/>tool registry"]
+    end
+    T -->|JSON trace, 10 event types| O["Oracle<br/>heuristics + LLM judge"]
+    O -->|"verdict + validated flag"| M["5x2 matrix"]
+    D["Defense layer<br/>(planned, Phase 6)"] -.->|switchable| T
+    S["Scoring metric<br/>(planned, Phase 5)"] -.-> M
+```
+
+The two target pipelines differ on purpose:
+
+```mermaid
+flowchart LR
+    subgraph P1["Pipeline #1: research_assistant (fixed edges)"]
+        direction LR
+        A1[orchestrator] --> A2[researcher] --> A3["summarizer<br/>(victim)"]
+    end
+    subgraph P2["Pipeline #2: task_delegation (enacted routing)"]
+        direction LR
+        B1[coordinator] -->|conditional edge| B2[analyst] --> B3["executor<br/>(victim)"]
+    end
+```
 
 ## Status
 
