@@ -1,0 +1,1912 @@
+<meta charset="utf-8">
+<title>TrustGuard Console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap">
+
+<style>
+  /* A committed single-visual-world design: an instrument screen. It paints its
+     own ground in either host theme rather than swapping palettes.
+     Channels carry their own hue so the eye can tell them apart in motion:
+     cyan = message bus, violet = blackboard, lime = tools. Amber is the
+     injection, coral the impact, mint the clean outcome. */
+  :root {
+    --void:   #04060D;
+    --panel:  #0A0E1A;
+    --raised: #111728;
+    --line:   #1D2540;
+    --dim:    #6B7A9B;
+    --text:   #DCE4F5;
+
+    --bus:    #35D6F0;
+    --board:  #A97BFF;
+    --tool:   #9EE84B;
+    --inject: #FFB03A;
+    --impact: #FF3D6E;
+    --hold:   #3FE8B0;
+
+    --display: "Chakra Petch", "IBM Plex Sans Condensed", system-ui, sans-serif;
+    --hud: "IBM Plex Sans Condensed", "Chakra Petch", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--void);
+    color: var(--text);
+    font-family: var(--mono);
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ------------------------------------------------------ ambient field */
+
+  .field, .scan, .vign {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+
+  /* The whole screen takes the hit, not just the panel that reported it. */
+  .flash {
+    position: fixed; inset: 0; pointer-events: none; z-index: 40; opacity: 0;
+    box-shadow: inset 0 0 160px 30px var(--inject);
+    background: radial-gradient(ellipse at 50% 50%,
+      transparent 35%, rgba(255,176,58,.16) 100%);
+  }
+  .flash.impact {
+    box-shadow: inset 0 0 190px 40px var(--impact);
+    background: radial-gradient(ellipse at 50% 50%,
+      transparent 30%, rgba(255,61,110,.22) 100%);
+  }
+  .flash.on { animation: hit .85s ease-out; }
+  @keyframes hit {
+    0%   { opacity: 0 }
+    12%  { opacity: 1 }
+    100% { opacity: 0 }
+  }
+  .field {
+    background:
+      repeating-linear-gradient(0deg, rgba(35,50,86,.42) 0 1px, transparent 1px 46px),
+      repeating-linear-gradient(90deg, rgba(35,50,86,.42) 0 1px, transparent 1px 46px);
+    animation: drift 22s linear infinite;
+  }
+  @keyframes drift { to { background-position: 46px 46px, 46px 46px; } }
+  .scan {
+    background: repeating-linear-gradient(
+      0deg, rgba(0,0,0,.30) 0 1px, transparent 1px 3px);
+    opacity: .45; mix-blend-mode: multiply;
+  }
+  .vign {
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(53,214,240,.11), transparent 55%),
+      radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(4,6,13,.85) 100%);
+  }
+
+  .shell {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto; padding: 20px 20px 60px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .shell.shake { animation: shake .42s cubic-bezier(.36,.07,.19,.97); }
+  @keyframes shake {
+    10%, 90% { transform: translate3d(-2px, 0, 0); }
+    20%, 80% { transform: translate3d(4px, 0, 0); }
+    30%, 50%, 70% { transform: translate3d(-7px, 0, 0); }
+    40%, 60% { transform: translate3d(7px, 0, 0); }
+  }
+
+  /* ---------------------------------------------------------------- rail */
+
+  .rail {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px;
+    border: 1px solid var(--line); background: var(--panel);
+    padding: 11px 15px; position: relative; overflow: hidden;
+  }
+  .rail::after {
+    content: ""; position: absolute; left: -40%; top: 0; bottom: 0; width: 40%;
+    background: linear-gradient(90deg, transparent, rgba(53,214,240,.10), transparent);
+    animation: sweep 6s ease-in-out infinite;
+  }
+  @keyframes sweep { 0% { left: -40% } 60%, 100% { left: 110% } }
+
+  .mark {
+    font-family: var(--display); font-weight: 700; font-size: 19px;
+    letter-spacing: .04em; margin-right: auto;
+    display: flex; align-items: baseline; gap: 9px;
+  }
+  .mark em { font-style: normal; color: var(--bus); }
+  .mark small {
+    font-family: var(--hud); font-weight: 600; font-size: 10px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--dim);
+  }
+  .mark.glitch { animation: glitch .5s steps(2) 3; }
+  @keyframes glitch {
+    0%   { text-shadow: 2px 0 var(--impact), -2px 0 var(--bus); transform: translateX(1px) }
+    50%  { text-shadow: -3px 0 var(--impact), 3px 0 var(--bus); transform: translateX(-2px) }
+    100% { text-shadow: none; transform: none }
+  }
+
+  .stat { display: flex; flex-direction: column; gap: 0; }
+  .stat b {
+    font-family: var(--hud); font-size: 9px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--dim);
+  }
+  .stat i { font-style: normal; font-size: 12px; font-variant-numeric: tabular-nums; }
+
+  .rec {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--hud); font-size: 9.5px; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: var(--inject); border: 1px solid var(--inject); padding: 4px 9px;
+  }
+  .rec::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--inject); box-shadow: 0 0 8px var(--inject);
+    animation: blip 1.6s ease-in-out infinite;
+  }
+  @keyframes blip { 0%,100% { opacity: 1 } 50% { opacity: .2 } }
+
+  /* ------------------------------------------------------------ controls */
+
+  .controls {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 9px;
+    border: 1px solid var(--line); background: var(--panel); padding: 11px 13px;
+  }
+  .seg { display: flex; border: 1px solid var(--line); }
+  .seg button {
+    font-family: var(--hud); font-size: 11px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    background: transparent; color: var(--dim); border: 0;
+    padding: 8px 14px; cursor: pointer; transition: color .15s, background .15s;
+  }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button:hover { color: var(--text); }
+  .seg button[aria-pressed="true"] { background: var(--raised); color: var(--text); }
+  .seg.arm button[aria-pressed="true"][data-arm="attack"] {
+    color: var(--impact); box-shadow: inset 0 -2px 0 var(--impact);
+    text-shadow: 0 0 12px var(--impact);
+  }
+  .seg.arm button[aria-pressed="true"][data-arm="control"] {
+    color: var(--hold); box-shadow: inset 0 -2px 0 var(--hold);
+    text-shadow: 0 0 12px var(--hold);
+  }
+
+  .run {
+    font-family: var(--hud); font-size: 12px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    background: var(--bus); color: var(--void); border: 0;
+    padding: 10px 24px; cursor: pointer; margin-left: auto; position: relative;
+    box-shadow: 0 0 18px rgba(53,214,240,.45);
+    animation: breathe 2.6s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%,100% { box-shadow: 0 0 14px rgba(53,214,240,.35) }
+    50%     { box-shadow: 0 0 26px rgba(53,214,240,.7) }
+  }
+  .run:hover { filter: brightness(1.15); }
+  .run[disabled] {
+    background: var(--raised); color: var(--dim);
+    box-shadow: none; animation: none; cursor: default;
+  }
+  .ghost {
+    font-family: var(--hud); font-size: 11px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    background: transparent; color: var(--dim);
+    border: 1px solid var(--line); padding: 9px 14px; cursor: pointer;
+  }
+  .ghost:hover { color: var(--text); border-color: var(--dim); }
+  button:focus-visible { outline: 2px solid var(--bus); outline-offset: 2px; }
+
+  /* ---------------------------------------------------------------- deck */
+
+  .deck { display: grid; grid-template-columns: 1.06fr .94fr; gap: 16px; }
+  @media (max-width: 940px) { .deck { grid-template-columns: 1fr; } }
+
+  .box {
+    border: 1px solid var(--line); background: var(--panel);
+    display: flex; flex-direction: column; min-width: 0; position: relative;
+  }
+  .box::before, .box::after {
+    content: ""; position: absolute; width: 9px; height: 9px;
+    border: 1px solid var(--bus); opacity: .5; pointer-events: none;
+  }
+  .box::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+  .box::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+  .box > header {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; padding: 9px 14px; border-bottom: 1px solid var(--line);
+  }
+  .box > header h2 {
+    font-family: var(--hud); font-size: 10px; font-weight: 700; margin: 0;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--dim);
+  }
+  .box > header .tag {
+    font-family: var(--mono); font-size: 10px; color: var(--dim);
+    letter-spacing: .05em;
+  }
+  .box > header .tag.on { color: var(--bus); text-shadow: 0 0 10px var(--bus); }
+
+  /* --------------------------------------------------------------- graph */
+
+  .stage { position: relative; padding: 4px; overflow: hidden; }
+  svg.graph { display: block; width: 100%; height: auto; }
+
+  /* band scaffolding */
+  .bandlab {
+    font-family: var(--hud); font-size: 8.5px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase; fill: var(--dim);
+    opacity: .75;
+  }
+  .bandline { stroke: var(--line); stroke-width: 1; stroke-dasharray: 1 6; }
+
+  /* edges: a dim base trace plus an animated dashed overlay per channel */
+  .edge { stroke: #17203A; stroke-width: 1.3; fill: none; stroke-linejoin: round; }
+  .flow {
+    fill: none; stroke-width: 1.3; stroke-linejoin: round;
+    stroke-dasharray: 3 13; opacity: .17;
+    animation: march 1.6s linear infinite;
+  }
+  @keyframes march { to { stroke-dashoffset: -16; } }
+  .flow.bus    { stroke: var(--bus); }
+  .flow.board  { stroke: var(--board); }
+  .flow.tool   { stroke: var(--tool); }
+  .flow.hot    { opacity: .95; stroke-width: 2.1; animation-duration: .45s; }
+  .flow.inject { stroke: var(--inject); opacity: 1; stroke-width: 2.6;
+                 animation-duration: .3s; filter: drop-shadow(0 0 6px var(--inject)); }
+  .flow.impact { stroke: var(--impact); opacity: 1; stroke-width: 2.6;
+                 animation-duration: .3s; filter: drop-shadow(0 0 6px var(--impact)); }
+
+  /* nodes: clipped-corner HUD panels */
+  .node .plate {
+    fill: #101728; stroke: #26314F; stroke-width: 1.3;
+    transition: stroke .18s, fill .18s;
+  }
+  .node .name {
+    font-family: var(--hud); font-size: 10px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; fill: var(--text);
+    text-anchor: middle; dominant-baseline: middle;
+  }
+  .node .kind {
+    font-family: var(--mono); font-size: 7px; letter-spacing: .16em;
+    text-transform: uppercase; fill: var(--dim); text-anchor: middle;
+  }
+  .node .tally {
+    font-family: var(--mono); font-size: 7.5px; fill: var(--dim);
+    text-anchor: end; font-variant-numeric: tabular-nums; opacity: .8;
+  }
+  .node .brk { stroke: #37436A; stroke-width: 1.2; fill: none; }
+  .node .led { fill: #37436A; }
+
+  .node.agent .plate { fill: #121A2E; }
+  .node.store .plate { stroke: #34285C; }
+  .node.tool  .plate { stroke: #2C4426; }
+  .node.gate  .plate { stroke: #2A3350; stroke-dasharray: 4 3; }
+
+  .node.wake .plate { stroke: var(--chan); fill: #0F2136; }
+  .node.wake .name  { fill: var(--chan); }
+  .node.wake .brk   { stroke: var(--chan); }
+  .node.wake .led   { fill: var(--chan); }
+  .node.wake        { filter: drop-shadow(0 0 7px var(--chan)); }
+
+  .node.hit .plate {
+    stroke: var(--impact); fill: #260C18; stroke-dasharray: none;
+    animation: alarm 1.05s ease-in-out infinite;
+  }
+  .node.hit .name { fill: var(--impact); }
+  .node.hit .kind { fill: var(--impact); opacity: .8; }
+  .node.hit .brk  { stroke: var(--impact); }
+  .node.hit .led  { fill: var(--impact); }
+  @keyframes alarm {
+    0%,100% { filter: drop-shadow(0 0 3px var(--impact)) }
+    50%     { filter: drop-shadow(0 0 13px var(--impact)) }
+  }
+  .node .flag {
+    font-family: var(--hud); font-size: 7px; font-weight: 700;
+    letter-spacing: .16em; fill: var(--impact); text-anchor: middle;
+    opacity: 0;
+  }
+  .node.hit .flag { opacity: 1; }
+
+  /* tracer rounds and muzzle / impact flashes */
+  .tracer { stroke-linecap: round; fill: none; }
+  .ring   { fill: none; stroke-width: 1.6; }
+  .spark  { fill: none; stroke-width: 2; }
+
+  .motes circle { fill: var(--bus); opacity: .16; }
+  @keyframes mote {
+    0%   { transform: translate(0, 0);      opacity: 0 }
+    12%  { opacity: .22 }
+    88%  { opacity: .22 }
+    100% { transform: translate(34px, -46px); opacity: 0 }
+  }
+
+  .radar {
+    position: absolute; top: 0; bottom: 0; width: 150px; left: -150px;
+    pointer-events: none; opacity: 0;
+    background: linear-gradient(90deg, transparent, rgba(53,214,240,.13), transparent);
+    border-right: 1px solid rgba(53,214,240,.45);
+  }
+  .radar.on { opacity: 1; animation: radar 3.4s linear infinite; }
+  @keyframes radar { to { left: 100%; } }
+
+  .band {
+    position: absolute; left: 4px; right: 4px; top: 4px; z-index: 3;
+    font-family: var(--hud); font-size: 11.5px; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; padding: 9px 13px;
+    color: var(--inject); border: 1px solid var(--inject);
+    background:
+      repeating-linear-gradient(45deg, rgba(255,176,58,.16) 0 9px,
+                                       rgba(255,176,58,.05) 9px 18px);
+    opacity: 0; transform: translateY(-8px);
+    transition: opacity .2s, transform .2s; pointer-events: none;
+  }
+  .band.impact {
+    color: var(--impact); border-color: var(--impact);
+    background:
+      repeating-linear-gradient(45deg, rgba(255,61,110,.18) 0 9px,
+                                       rgba(255,61,110,.05) 9px 18px);
+  }
+  .band.on {
+    opacity: 1; transform: none;
+    box-shadow: 0 0 26px rgba(255,176,58,.3);
+  }
+  .band.on.impact { box-shadow: 0 0 26px rgba(255,61,110,.35); }
+
+  /* --------------------------------------------------------- instruments */
+
+  .readout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border-top: 1px solid var(--line); }
+  /* The policy action holds a filename, the other two hold single words. */
+  .readout.verdict { grid-template-columns: 1.6fr 1fr .9fr; }
+  .readout > div { background: var(--panel); padding: 10px 14px; min-width: 0; }
+  .readout b {
+    display: block; font-family: var(--hud); font-size: 9px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--dim);
+    margin-bottom: 2px;
+  }
+  /* Values here range from "0" to a 25-character filename, so the scale flexes
+     rather than letting the long case break out of its cell. */
+  .readout i {
+    font-style: normal; font-family: var(--display);
+    font-size: clamp(15px, 1.55vw, 20px); line-height: 1.25;
+    font-weight: 600; font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere; display: block;
+  }
+  .c-bus   { color: var(--bus);   text-shadow: 0 0 14px rgba(53,214,240,.5); }
+  .c-board { color: var(--board); text-shadow: 0 0 14px rgba(169,123,255,.5); }
+  .c-tool  { color: var(--tool);  text-shadow: 0 0 14px rgba(158,232,75,.45); }
+  .v-pending { color: var(--dim); }
+  .v-success { color: var(--impact); text-shadow: 0 0 16px rgba(255,61,110,.55); }
+  .v-failure { color: var(--hold);   text-shadow: 0 0 16px rgba(63,232,176,.5); }
+
+  /* ------------------------------------------------------- instruments */
+
+  .instruments {
+    display: flex; flex-direction: column; gap: 1px;
+    background: var(--line); border-top: 1px solid var(--line);
+  }
+  .instruments b {
+    display: block; font-family: var(--hud); font-size: 9px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--dim);
+  }
+
+  /* --- channel tiles --- */
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; }
+  .tile {
+    background: var(--panel); padding: 9px 13px 10px; position: relative;
+    min-width: 0; overflow: hidden;
+  }
+  .tile::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+    background: var(--chan); opacity: .35; transition: opacity .2s;
+  }
+  .tile.fire::before { opacity: 1; box-shadow: 0 0 12px var(--chan); }
+  .tile.bus   { --chan: var(--bus); }
+  .tile.board { --chan: var(--board); }
+  .tile.tool  { --chan: var(--tool); }
+
+  .tile-row { display: flex; align-items: baseline; gap: 8px; }
+  .tile i {
+    font-style: normal; font-family: var(--display); font-size: 22px;
+    font-weight: 600; font-variant-numeric: tabular-nums; color: var(--chan);
+    text-shadow: 0 0 14px var(--chan); line-height: 1.1;
+  }
+  .tile .delta {
+    font-family: var(--mono); font-size: 10px; color: var(--chan);
+    opacity: 0; transform: translateY(4px);
+  }
+  .tile.fire .delta { animation: pop .7s ease-out; }
+  @keyframes pop {
+    0% { opacity: 0; transform: translateY(6px) }
+    25% { opacity: 1; transform: translateY(0) }
+    100% { opacity: 0; transform: translateY(-6px) }
+  }
+  .tile .share {
+    display: block; height: 3px; margin-top: 7px; background: var(--raised);
+  }
+  .tile .share em {
+    display: block; height: 100%; width: 0; background: var(--chan);
+    box-shadow: 0 0 10px var(--chan);
+    transition: width .5s cubic-bezier(.2,.8,.2,1);
+  }
+
+  /* --- threat LEDs + scope --- */
+  .gauges { display: grid; grid-template-columns: 232px 1fr; gap: 1px; }
+  @media (max-width: 620px) { .gauges { grid-template-columns: 1fr; } }
+  .gauges > div { background: var(--panel); padding: 9px 13px 11px; min-width: 0; }
+
+  .leds { display: flex; gap: 2px; margin-top: 7px; height: 14px; }
+  .leds i {
+    flex: 1 1 0; background: #1B2338; opacity: 1;
+    border-top: 1px solid #232C46;
+    transition: opacity .18s, box-shadow .18s, background .18s;
+  }
+  .leds i.on { opacity: 1; }
+  .leds i.on.lo  { background: var(--hold);   box-shadow: 0 0 8px var(--hold); }
+  .leds i.on.mid { background: var(--inject); box-shadow: 0 0 8px var(--inject); }
+  .leds i.on.hi  { background: var(--impact); box-shadow: 0 0 9px var(--impact); }
+  .leds i.peak { background: var(--text); box-shadow: 0 0 12px var(--text); opacity: 1; }
+  .leds.critical i.on.hi { animation: ledpulse .8s ease-in-out infinite; }
+  @keyframes ledpulse { 0%,100% { opacity: 1 } 50% { opacity: .35 } }
+
+  .gauge-foot {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-top: 7px; font-family: var(--hud); font-size: 10px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--hold);
+  }
+  .gauge-foot span:last-child {
+    font-family: var(--mono); font-variant-numeric: tabular-nums;
+    letter-spacing: 0; font-weight: 500;
+  }
+
+  .scope-wrap { position: relative; margin-top: 6px; }
+  canvas.scope { display: block; width: 100%; height: 56px; }
+  .scope-tag {
+    position: absolute; right: 0; top: -14px; font-family: var(--mono);
+    font-size: 9.5px; color: var(--dim); letter-spacing: .06em;
+  }
+
+  /* --- per-channel timeline --- */
+  .tracks { background: var(--panel); padding: 9px 13px 12px; }
+  .track {
+    display: grid; grid-template-columns: 52px 1fr; gap: 10px;
+    align-items: center; margin-top: 6px;
+  }
+  .track > span {
+    font-family: var(--hud); font-size: 9px; font-weight: 600;
+    letter-spacing: .13em; text-transform: uppercase; color: var(--dim);
+  }
+  .trk {
+    position: relative; height: 11px; background: var(--raised);
+    overflow: hidden;
+  }
+  .trk::after {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg,
+      rgba(255,255,255,.05) 0 1px, transparent 1px 24px);
+  }
+  .trk em {
+    position: absolute; top: 1px; bottom: 1px; width: 4px; margin-left: -2px;
+    background: var(--chan); box-shadow: 0 0 9px var(--chan);
+    animation: tick .3s ease-out;
+  }
+  @keyframes tick { from { transform: scaleY(.2); opacity: 0 } to { transform: none; opacity: 1 } }
+  .trk em.inject { background: var(--inject); box-shadow: 0 0 12px var(--inject); width: 6px; }
+  .trk em.impact { background: var(--impact); box-shadow: 0 0 12px var(--impact); width: 6px; }
+  .track.bus   .trk { --chan: var(--bus); }
+  .track.board .trk { --chan: var(--board); }
+  .track.tool  .trk { --chan: var(--tool); }
+
+  .head {
+    position: absolute; top: -3px; bottom: -3px; width: 1px; left: 0;
+    background: var(--text); box-shadow: 0 0 10px var(--text); opacity: 0;
+    transition: left .25s linear;
+  }
+  .head.on { opacity: .85; }
+
+  /* ----------------------------------------------------------------- log */
+
+  .stream { position: relative; flex: none; }
+
+  .log {
+    height: 392px; overflow-y: auto; position: relative;
+    margin: 0; padding: 8px 16px 8px 10px; list-style: none;
+    display: flex; flex-direction: column; gap: 0;
+    /* Instant, not smooth: at 4x the smooth scroller trails the appends and
+       the newest line — the one being talked about — drifts off screen. */
+    scroll-behavior: auto;
+  }
+  .log::-webkit-scrollbar { width: 5px; }
+  .log::-webkit-scrollbar-track { background: transparent; }
+  .log::-webkit-scrollbar-thumb { background: #263053; }
+
+  /* time · spine · body · size */
+  .log li.ev {
+    display: grid; grid-template-columns: 52px 13px 1fr 40px;
+    gap: 8px; padding: 5px 0 6px; align-items: start; font-size: 12.5px;
+    position: relative; animation: slide .26s ease-out;
+  }
+  @keyframes slide {
+    from { opacity: 0; transform: translateX(-12px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .log .when {
+    text-align: right; font-variant-numeric: tabular-nums; padding-top: 1px;
+  }
+  .log .when b {
+    display: block; font-weight: 500; font-size: 11px; color: #7C89A8;
+  }
+  .log .when i {
+    display: block; font-style: normal; font-size: 9px; color: #35405C;
+    letter-spacing: .04em;
+  }
+
+  /* the spine: a continuous rail with one node per event */
+  .log .spine { position: relative; align-self: stretch; }
+  .log .spine::before {
+    content: ""; position: absolute; left: 5px; top: -6px; bottom: -6px;
+    width: 1px; background: #202946;
+  }
+  .log .spine::after {
+    content: ""; position: absolute; left: 2px; top: 4px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--void); border: 1.5px solid #35405C;
+  }
+  .log li.bus   .spine::after { border-color: var(--bus);   box-shadow: 0 0 8px var(--bus); }
+  .log li.board .spine::after { border-color: var(--board); box-shadow: 0 0 8px var(--board); }
+  .log li.tool  .spine::after { border-color: var(--tool);  box-shadow: 0 0 8px var(--tool); }
+  .log li:first-child .spine::before { top: 10px; }
+  .log li:last-child .spine::before { bottom: 50%; }
+
+  .log .who {
+    font-style: normal; font-size: 11px; color: var(--dim); letter-spacing: .04em;
+  }
+  .log li.bus   .who { color: var(--bus); }
+  .log li.board .who { color: var(--board); }
+  .log li.tool  .who { color: var(--tool); }
+  .log .lbl { font-weight: 600; color: var(--text); }
+  .log .tgt { color: var(--dim); }
+  .log .det {
+    margin: 3px 0 0; color: #7C89A8; font-size: 11.5px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .log .size {
+    text-align: right; font-size: 9.5px; color: #35405C; padding-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .log .note {
+    display: block; margin-top: 5px; font-size: 11px; padding: 4px 9px;
+    border-left: 2px solid currentColor; background: rgba(255,255,255,.035);
+  }
+
+  .log li.inject {
+    background: linear-gradient(90deg, rgba(255,176,58,.16), transparent 72%);
+  }
+  .log li.inject .lbl, .log li.inject .who, .log li.inject .note {
+    color: var(--inject); text-shadow: 0 0 12px rgba(255,176,58,.5);
+  }
+  .log li.inject .spine::after {
+    border-color: var(--inject); background: var(--inject);
+    box-shadow: 0 0 12px var(--inject);
+  }
+  .log li.impact {
+    background: linear-gradient(90deg, rgba(255,61,110,.18), transparent 72%);
+  }
+  .log li.impact .lbl, .log li.impact .who, .log li.impact .note {
+    color: var(--impact); text-shadow: 0 0 12px rgba(255,61,110,.5);
+  }
+  .log li.impact .spine::after {
+    border-color: var(--impact); background: var(--impact);
+    box-shadow: 0 0 12px var(--impact);
+  }
+
+  .log li.idle { grid-template-columns: 1fr; color: var(--dim); font-size: 11.5px; }
+  .log li.wait {
+    grid-template-columns: 52px 13px 1fr; color: #4A5675; font-size: 11.5px;
+  }
+  .cursor {
+    display: inline-block; width: 7px; height: 13px; background: var(--bus);
+    vertical-align: -2px; animation: caret .9s steps(1) infinite;
+    box-shadow: 0 0 10px var(--bus);
+  }
+  @keyframes caret { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
+
+  /* density minimap down the right edge of the stream */
+  .minimap {
+    position: absolute; right: 3px; top: 8px; bottom: 8px; width: 5px;
+    display: flex; flex-direction: column; gap: 1px; pointer-events: none;
+  }
+  .minimap i {
+    flex: 1 1 0; background: #212A47; opacity: .5; transition: opacity .2s, background .2s;
+  }
+  .minimap i.lit { opacity: 1; }
+  .minimap i.bus.lit    { background: var(--bus); }
+  .minimap i.board.lit  { background: var(--board); }
+  .minimap i.tool.lit   { background: var(--tool); }
+  .minimap i.think.lit  { background: #4A5675; }
+  .minimap i.inject.lit { background: var(--inject); box-shadow: 0 0 8px var(--inject); }
+  .minimap i.impact.lit { background: var(--impact); box-shadow: 0 0 8px var(--impact); }
+
+  /* ------------------------------------------------- adjudication path */
+
+  .opath {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border-top: 1px solid var(--line);
+  }
+  .opath > div {
+    background: var(--panel); padding: 9px 13px; min-width: 0;
+    opacity: .35; transition: opacity .35s;
+  }
+  .opath > div.on { opacity: 1; }
+  .opath b {
+    display: block; font-family: var(--hud); font-size: 8.5px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--dim);
+    margin-bottom: 3px;
+  }
+  .opath em {
+    font-style: normal; font-family: var(--mono); font-size: 12.5px;
+    color: var(--dim); display: block;
+  }
+  .opath small {
+    display: block; font-size: 9.5px; color: #4A5675; margin-top: 2px;
+  }
+  .opath .o-success { color: var(--impact); }
+  .opath .o-failure { color: var(--hold); }
+  .opath .o-skip    { color: #4A5675; }
+
+  .caveat {
+    margin: 0; padding: 10px 14px; border-top: 1px solid var(--line);
+    font-size: 11.5px; color: var(--inject);
+    background: repeating-linear-gradient(45deg,
+      rgba(255,176,58,.09) 0 10px, transparent 10px 20px);
+  }
+  .caveat.clean {
+    color: var(--dim); background: transparent;
+  }
+  .caveat strong { color: var(--inject); }
+  .caveat.clean strong { color: var(--hold); }
+
+  /* -------------------------------------------------------------- matrix */
+
+  table.matrix { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  table.matrix th, table.matrix td {
+    text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--line);
+  }
+  table.matrix thead th {
+    font-family: var(--hud); font-size: 9px; font-weight: 600;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--dim);
+  }
+  table.matrix tbody tr { transition: background .2s; }
+  table.matrix tbody tr:hover { background: var(--raised); }
+  table.matrix td.n {
+    font-family: var(--display); color: var(--dim); width: 34px;
+    font-variant-numeric: tabular-nums;
+  }
+  table.matrix tbody tr:last-child td { border-bottom: 0; }
+  .chip {
+    display: inline-block; font-family: var(--hud); font-size: 9px;
+    font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
+    padding: 3px 8px; border: 1px solid currentColor;
+  }
+  .chip.live { color: var(--hold); box-shadow: 0 0 12px rgba(63,232,176,.3); }
+  .chip.built { color: var(--inject); }
+  .chip.blocked { color: var(--impact); }
+  .chip.planned { color: #46527040; border-style: dashed; color: var(--dim); opacity: .6; }
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 6px 20px; padding: 10px 14px;
+    border-top: 1px solid var(--line); font-size: 11.5px; color: var(--dim);
+  }
+  .legend div { display: flex; align-items: baseline; gap: 8px; }
+
+  footer.foot {
+    color: var(--dim); font-size: 11.5px; line-height: 1.65;
+    border-top: 1px solid var(--line); padding-top: 14px;
+  }
+  footer.foot strong { color: var(--text); font-weight: 500; }
+
+  /* ---------------------------------------------------------------- boot */
+
+  .boot {
+    position: fixed; inset: 0; z-index: 50; display: none;
+    background: rgba(4,6,13,.94); backdrop-filter: blur(2px);
+    align-items: center; justify-content: center;
+  }
+  .boot.on { display: flex; }
+  .boot.out { animation: bootout .45s ease forwards; }
+  @keyframes bootout { to { opacity: 0; visibility: hidden; } }
+  .boot-inner { width: min(560px, 88vw); }
+  .boot h3 {
+    font-family: var(--display); font-size: 15px; font-weight: 700; margin: 0 0 14px;
+    letter-spacing: .18em; text-transform: uppercase; color: var(--bus);
+    text-shadow: 0 0 20px rgba(53,214,240,.6);
+  }
+  .boot ol {
+    list-style: none; margin: 0 0 16px; padding: 0;
+    font-size: 12.5px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .boot li { color: var(--dim); animation: slide .2s ease-out; }
+  .boot li span { color: var(--hold); }
+  .boot .bar { height: 3px; background: var(--raised); overflow: hidden; }
+  .boot .bar i {
+    display: block; height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--bus), var(--board));
+    box-shadow: 0 0 16px var(--bus);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+    .radar, .scan { display: none; }
+  }
+</style>
+
+<div class="field"></div>
+<div class="vign"></div>
+<div class="scan"></div>
+<div class="flash" id="flash"></div>
+
+<div class="boot" id="boot">
+  <div class="boot-inner">
+    <h3 id="boot-title">Establishing trace link</h3>
+    <ol id="boot-lines"></ol>
+    <div class="bar"><i id="boot-bar"></i></div>
+  </div>
+</div>
+
+<div class="shell" id="shell">
+
+  <div class="rail">
+    <div class="mark" id="mark">TRUST<em>GUARD</em> <small>console</small></div>
+    <div class="stat"><b>Pipeline</b><i>research_assistant 1.0.0</i></div>
+    <div class="stat"><b>Backend</b><i id="s-model">&mdash;</i></div>
+    <div class="stat"><b>Elapsed</b><i id="s-clock">T+0.0s</i></div>
+    <div class="stat"><b>Rate</b><i id="s-rate">0.0 ev/s</i></div>
+    <div class="rec" id="s-source">recorded</div>
+  </div>
+
+  <div class="controls">
+    <div class="seg" id="pick-scenario" role="group" aria-label="Attack"></div>
+    <div class="seg arm" id="pick-arm" role="group" aria-label="Arm">
+      <button type="button" data-arm="attack" aria-pressed="true">Attack arm</button>
+      <button type="button" data-arm="control" aria-pressed="false">Control arm</button>
+    </div>
+    <div class="seg" id="pick-speed" role="group" aria-label="Speed">
+      <button type="button" data-speed="1" aria-pressed="true">1&times;</button>
+      <button type="button" data-speed="2" aria-pressed="false">2&times;</button>
+      <button type="button" data-speed="4" aria-pressed="false">4&times;</button>
+    </div>
+    <button type="button" class="ghost" id="reset">Reset</button>
+    <button type="button" class="run" id="run">&#9654;&nbsp; Run</button>
+  </div>
+
+  <div class="deck">
+    <section class="box">
+      <header>
+        <h2>Agent graph</h2>
+        <span class="tag" id="g-tag">standby</span>
+      </header>
+      <div class="stage">
+        <div class="radar" id="radar"></div>
+        <div class="band" id="band"></div>
+        <svg class="graph" viewBox="0 0 880 476" role="img"
+             aria-label="Agent pipeline graph: agents, tool surface, blackboard keys and the adjudication stage">
+          <g id="bands"></g>
+          <g class="motes" id="motes"></g>
+          <g id="edges"></g>
+          <g id="flows"></g>
+          <g id="nodes"></g>
+          <g id="fx"></g>
+        </svg>
+      </div>
+      <div class="instruments">
+        <div class="tiles">
+          <div class="tile bus" id="t-bus">
+            <b>Bus messages</b>
+            <div class="tile-row"><i id="c-bus">0</i><span class="delta">+1</span></div>
+            <span class="share"><em id="sh-bus"></em></span>
+          </div>
+          <div class="tile board" id="t-board">
+            <b>Blackboard ops</b>
+            <div class="tile-row"><i id="c-board">0</i><span class="delta">+1</span></div>
+            <span class="share"><em id="sh-board"></em></span>
+          </div>
+          <div class="tile tool" id="t-tool">
+            <b>Tool calls</b>
+            <div class="tile-row"><i id="c-tool">0</i><span class="delta">+1</span></div>
+            <span class="share"><em id="sh-tool"></em></span>
+          </div>
+        </div>
+
+        <div class="gauges">
+          <div>
+            <b>Threat level</b>
+            <div class="leds" id="leds"></div>
+            <div class="gauge-foot">
+              <span id="threat-label">Nominal</span><span id="threat-pct">0%</span>
+            </div>
+          </div>
+          <div>
+            <b>Channel activity</b>
+            <div class="scope-wrap">
+              <span class="scope-tag" id="scope-tag">idle</span>
+              <canvas class="scope" id="scope"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="tracks">
+          <b>Channel timeline</b>
+          <div class="track bus">
+            <span>Bus</span><div class="trk" id="rail-bus"><i class="head" id="head-bus"></i></div>
+          </div>
+          <div class="track board">
+            <span>Board</span><div class="trk" id="rail-board"><i class="head" id="head-board"></i></div>
+          </div>
+          <div class="track tool">
+            <span>Tools</span><div class="trk" id="rail-tool"><i class="head" id="head-tool"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="box">
+      <header>
+        <h2>Trace stream</h2>
+        <span class="tag" id="l-tag">&mdash;</span>
+      </header>
+      <div class="stream">
+        <ol class="log" id="log" aria-live="polite"></ol>
+        <div class="minimap" id="minimap" aria-hidden="true"></div>
+      </div>
+      <div class="opath">
+        <div id="o-heur"><b>Heuristic</b><em>&mdash;</em><small></small></div>
+        <div id="o-judge"><b>LLM judge</b><em>&mdash;</em><small></small></div>
+        <div id="o-final"><b>Adjudicated</b><em>&mdash;</em><small></small></div>
+      </div>
+      <div class="readout verdict">
+        <div><b>Policy action</b><i id="v-action" class="v-pending">&mdash;</i></div>
+        <div><b>Oracle verdict</b><i id="v-verdict" class="v-pending">pending</i></div>
+        <div><b>Decided by</b><i id="v-by" class="v-pending">&mdash;</i></div>
+      </div>
+      <p class="caveat clean" id="v-caveat"></p>
+    </section>
+  </div>
+
+  <section class="box">
+    <header>
+      <h2>Coverage &mdash; taxonomy &times; pipeline</h2>
+      <span class="tag">what exists today, not what is planned to</span>
+    </header>
+    <div style="overflow-x:auto">
+      <table class="matrix">
+        <thead>
+          <tr><th></th><th>Attack class</th><th>Pipeline #1 &mdash; research assistant</th><th>Pipeline #2 &mdash; task delegation</th></tr>
+        </thead>
+        <tbody id="matrix"></tbody>
+      </table>
+    </div>
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <footer class="foot" id="foot"></footer>
+</div>
+
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function () {
+  "use strict";
+
+  var DATA = JSON.parse(document.getElementById("data").textContent);
+  var $ = function (id) { return document.getElementById(id); };
+  var SVGNS = "http://www.w3.org/2000/svg";
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var state = {
+    scenario: 0, arm: "attack", speed: 1, playing: false,
+    timers: [], frames: [], clock: null, threat: 0
+  };
+
+  var LANE_COLOR = {
+    bus: "--bus", board: "--board", tool: "--tool", think: "--dim",
+    inject: "--inject", impact: "--impact"
+  };
+
+  function hue(name) {
+    return getComputedStyle(document.documentElement)
+      .getPropertyValue(LANE_COLOR[name] || "--dim").trim();
+  }
+
+  var AGENTS = ["user", "orchestrator", "researcher", "summarizer"];
+
+  /* Which node an event leaves from and arrives at. Agents keep fixed nodes;
+     tools and blackboard keys get one node each, discovered from the run, so
+     the graph shows the actual surface this trace touched rather than two
+     catch-all boxes labelled "tools" and "blackboard". */
+  function ends(ev) {
+    if (ev._ends) { return ev._ends; }        // synthetic adjudication hop
+    var a = "a-" + ev.actor;
+    switch (ev.kind) {
+      case "pipeline_input":  return ["a-user", "a-orchestrator"];
+      case "pipeline_output": return ["a-summarizer", "a-user"];
+      case "agent_message":
+      case "delegation":      return [a, "a-" + ev.to];
+      case "tool_call":       return [a, "x-" + ev.to];
+      case "tool_result":     return ["x-" + ev.actor, "a-" + ev.to];
+      case "memory_write":    return [a, "k-" + ev.to];
+      case "memory_read":     return ["k-" + ev.to, a];
+      default:                return [a, null];      // reasoning rides no edge
+    }
+  }
+
+  /* Which node the marker sticks to. Not simply the edge's target: on an
+     impact the compromised party is the agent that took the diverted action,
+     not the tool surface it called; and on a poisoned read it is the reader
+     loading the value, not the key it came from. */
+  function compromised(ev) {
+    if (ev.flag === "impact" || ev.kind === "memory_read") { return "a-" + ev.actor; }
+    return ends(ev)[1];
+  }
+
+  function scenario() { return DATA.scenarios[state.scenario]; }
+  function arm() { return scenario()[state.arm]; }
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (ch) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch];
+    });
+  }
+
+  /* ------------------------------------------------------ graph chrome */
+
+  var SVGW = 880, GX0 = 104, GX1 = 864;
+  var BANDS = [
+    { key: "agent", y: 54,  label: "Agents",       h: 46 },
+    { key: "tool",  y: 176, label: "Tool surface", h: 40 },
+    { key: "store", y: 290, label: "Blackboard",   h: 40 },
+    { key: "gate",  y: 400, label: "Adjudication", h: 40 }
+  ];
+  var BOX = {};          // node id -> geometry
+  var EDGEMAP = {};      // "from>to" -> flow path element
+
+  function mk(tag, attrs) {
+    var el = document.createElementNS(SVGNS, tag);
+    Object.keys(attrs || {}).forEach(function (k) { el.setAttribute(k, attrs[k]); });
+    return el;
+  }
+
+  /* A plate with two corners clipped — reads as an instrument panel rather
+     than a rounded card, and the notch gives the corner brackets a seat. */
+  function platePath(x, y, w, h) {
+    var c = 7;
+    return "M " + (x + c) + " " + y + " H " + (x + w) + " V " + (y + h - c) +
+           " L " + (x + w - c) + " " + (y + h) + " H " + x + " V " + (y + c) + " Z";
+  }
+
+  function place(ids, band, w) {
+    if (!ids.length) { return; }
+    var span = GX1 - GX0;
+    var gap = ids.length > 1 ? (span - ids.length * w) / (ids.length - 1) : 0;
+    ids.forEach(function (id, i) {
+      var x = ids.length > 1 ? GX0 + i * (w + gap) : GX0 + (span - w) / 2;
+      BOX[id] = { x: x, y: band.y, w: w, h: band.h,
+                  cx: x + w / 2, cy: band.y + band.h / 2,
+                  top: band.y, bottom: band.y + band.h,
+                  left: x, right: x + w, band: band.key };
+    });
+  }
+
+  function drawNode(id, label, kind) {
+    var b = BOX[id];
+    if (!b) { return; }
+    var g = mk("g", { "class": "node " + kind, id: id });
+    g.style.setProperty("--chan", hue(
+      kind === "store" ? "board" : kind === "tool" ? "tool" : "bus"));
+    g.appendChild(mk("path", { "class": "plate", d: platePath(b.x, b.y, b.w, b.h) }));
+
+    var k = 7;
+    [[b.left, b.top, 1, 1], [b.right, b.bottom, -1, -1]].forEach(function (c) {
+      g.appendChild(mk("path", { "class": "brk",
+        d: "M " + (c[0] + c[2] * k) + " " + c[1] + " L " + c[0] + " " + c[1] +
+           " L " + c[0] + " " + (c[1] + c[3] * k) }));
+    });
+    g.appendChild(mk("circle", { "class": "led", cx: b.right - 7, cy: b.top + 7, r: 2.1 }));
+
+    var name = mk("text", { "class": "name", x: b.cx, y: b.cy - 4 });
+    name.textContent = label;
+    g.appendChild(name);
+
+    var kindLab = mk("text", { "class": "kind", x: b.cx, y: b.bottom - 8 });
+    kindLab.textContent = kind === "agent" ? "agent" : kind === "store" ? "key"
+                        : kind === "tool" ? "tool" : "stage";
+    g.appendChild(kindLab);
+
+    var tally = mk("text", { "class": "tally", id: "n-" + id, x: b.right - 12, y: b.bottom - 8 });
+    g.appendChild(tally);
+
+    var flag = mk("text", { "class": "flag", x: b.cx, y: b.top - 6 });
+    flag.textContent = "COMPROMISED";
+    g.appendChild(flag);
+
+    $("nodes").appendChild(g);
+  }
+
+  /* Orthogonal elbow between two plates. Cross-band links are staggered on
+     their mid-line so parallel runs read as separate traces, not one smear. */
+  function route(a, b, i) {
+    if (!a || !b) { return null; }
+    if (a.band === b.band) {
+      return a.cx < b.cx
+        ? "M " + a.right + " " + a.cy + " H " + b.left
+        : "M " + a.left + " " + a.cy + " H " + b.right;
+    }
+    var down = a.cy < b.cy;
+    var from = down ? a.bottom : a.top;
+    var to = down ? b.top : b.bottom;
+    var mid = from + (to - from) * 0.5 + ((i % 5) - 2) * 7;
+    return "M " + a.cx + " " + from + " V " + mid + " H " + b.cx + " V " + to;
+  }
+
+  function buildGraph(events) {
+    ["bands", "edges", "flows", "nodes", "fx", "motes"].forEach(function (g) {
+      $(g).innerHTML = "";
+    });
+    BOX = {}; EDGEMAP = {}; tallies = {};
+
+    // Discover the tool and key surfaces this particular run actually touched.
+    var tools = [], keys = [];
+    events.forEach(function (ev) {
+      if (ev.kind === "tool_call" && tools.indexOf(ev.to) < 0) { tools.push(ev.to); }
+      if (ev.kind === "tool_result" && tools.indexOf(ev.actor) < 0) { tools.push(ev.actor); }
+      if ((ev.kind === "memory_write" || ev.kind === "memory_read")
+          && keys.indexOf(ev.to) < 0) { keys.push(ev.to); }
+    });
+
+    place(AGENTS.map(function (n) { return "a-" + n; }), BANDS[0], 132);
+    place(tools.map(function (n) { return "x-" + n; }), BANDS[1], 126);
+    place(keys.map(function (n) { return "k-" + n; }), BANDS[2], 126);
+    place(["g-policy", "g-oracle"], BANDS[3], 150);
+
+    BANDS.forEach(function (bd) {
+      var lab = mk("text", { "class": "bandlab", x: 10, y: bd.y + bd.h / 2 + 3 });
+      lab.textContent = bd.label;
+      $("bands").appendChild(lab);
+      $("bands").appendChild(mk("line", { "class": "bandline",
+        x1: 10, y1: bd.y + bd.h / 2 + 12, x2: GX0 - 16, y2: bd.y + bd.h / 2 + 12 }));
+    });
+
+    AGENTS.forEach(function (n) { drawNode("a-" + n, n, "agent"); });
+    tools.forEach(function (n) { drawNode("x-" + n, n, "tool"); });
+    keys.forEach(function (n) { drawNode("k-" + n, n, "store"); });
+    drawNode("g-policy", "policy gate", "gate");
+    drawNode("g-oracle", "oracle", "gate");
+
+    // One persistent trace per distinct hop in the run, plus the two
+    // adjudication hops the verdict travels once the run completes.
+    var seen = {}, i = 0;
+    var hops = events.map(ends).filter(function (e) { return e[0] && e[1]; });
+    var calls = events.filter(function (e) { return e.kind === "tool_call"; });
+    if (calls.length) { hops.push(["x-" + calls[calls.length - 1].to, "g-policy"]); }
+    hops.push(["g-policy", "g-oracle"]);
+
+    hops.forEach(function (h) {
+      var key = h[0] + ">" + h[1];
+      if (seen[key] || !BOX[h[0]] || !BOX[h[1]]) { return; }
+      seen[key] = true;
+      var d = route(BOX[h[0]], BOX[h[1]], i++);
+      if (!d) { return; }
+      $("edges").appendChild(mk("path", { "class": "edge", d: d }));
+      var f = mk("path", { "class": "flow", d: d });
+      $("flows").appendChild(f);
+      EDGEMAP[key] = f;
+    });
+
+    // Slow drifting motes, so the field behind the graph is never dead.
+    if (!reduced) {
+      for (var m = 0; m < 26; m++) {
+        var c = mk("circle", { r: (Math.random() * 1.4 + 0.5).toFixed(2),
+                               cx: (Math.random() * SVGW).toFixed(1),
+                               cy: (Math.random() * 470).toFixed(1) });
+        c.style.animation = "mote " + (13 + Math.random() * 15).toFixed(1) +
+                            "s linear infinite";
+        c.style.animationDelay = (-Math.random() * 22).toFixed(1) + "s";
+        $("motes").appendChild(c);
+      }
+    }
+  }
+
+  function ring(id, color, big) {
+    if (reduced) { return; }
+    var b = BOX[id];
+    if (!b) { return; }
+    var el = mk("circle", { "class": "ring", cx: b.cx, cy: b.cy, stroke: color });
+    $("fx").appendChild(el);
+    var t0 = performance.now(), dur = (big ? 900 : 620) / state.speed;
+    step(function (now) {
+      var p = Math.min((now - t0) / dur, 1);
+      el.setAttribute("r", 10 + p * (big ? 74 : 44));
+      el.setAttribute("opacity", (1 - p) * (big ? 1 : 0.7));
+      if (p >= 1) { el.remove(); return false; }
+      return true;
+    });
+  }
+
+  function step(fn) {
+    var id = requestAnimationFrame(function loop(now) {
+      if (fn(now)) { id = requestAnimationFrame(loop); state.frames.push(id); }
+    });
+    state.frames.push(id);
+  }
+
+  /* Four spokes thrown outward — a muzzle flash where a round leaves, and an
+     impact burst where it lands. */
+  function spark(id, color) {
+    if (reduced) { return; }
+    var b = BOX[id];
+    if (!b) { return; }
+    var g = mk("g", { "class": "spark", stroke: color });
+    for (var i = 0; i < 4; i++) { g.appendChild(mk("line", {})); }
+    g.style.filter = "drop-shadow(0 0 6px " + color + ")";
+    $("fx").appendChild(g);
+    var t0 = performance.now(), dur = 360 / state.speed;
+    step(function (now) {
+      var p = Math.min((now - t0) / dur, 1);
+      Array.prototype.forEach.call(g.children, function (ln, i) {
+        var ang = (Math.PI / 2) * i + Math.PI / 4;
+        var r0 = 6 + p * 16, r1 = 6 + p * 28;
+        ln.setAttribute("x1", b.cx + Math.cos(ang) * r0);
+        ln.setAttribute("y1", b.cy + Math.sin(ang) * r0);
+        ln.setAttribute("x2", b.cx + Math.cos(ang) * r1);
+        ln.setAttribute("y2", b.cy + Math.sin(ang) * r1);
+      });
+      g.setAttribute("opacity", 1 - p);
+      if (p >= 1) { g.remove(); return false; }
+      return true;
+    });
+  }
+
+  /* A tracer round: a bright leading segment with three fading segments
+     behind it, all riding the path so the round banks through the elbows. */
+  function tracer(ev, ms) {
+    var e = ends(ev);
+    if (!e[0] || !e[1]) { return; }
+    var flow = EDGEMAP[e[0] + ">" + e[1]];
+    var lane = ev.flag || "hot";
+    if (flow) {
+      flow.classList.add(lane);
+      if (!ev.flag) {
+        state.timers.push(setTimeout(function () { flow.classList.remove("hot"); }, ms));
+      }
+    }
+    if (reduced || !flow) { return; }
+
+    var color = hue(ev.flag || ev.lane);
+    spark(e[0], color);
+
+    var segs = [];
+    for (var i = 0; i < 4; i++) {
+      var ln = mk("line", { "class": "tracer", stroke: color,
+        "stroke-width": ((ev.flag ? 4.4 : 3.1) * (1 - i * 0.19)).toFixed(2),
+        opacity: (1 - i * 0.24).toFixed(2) });
+      ln.style.filter = "drop-shadow(0 0 " + (ev.flag ? 10 : 7) + "px " + color + ")";
+      $("fx").appendChild(ln);
+      segs.push(ln);
+    }
+
+    var len = flow.getTotalLength();
+    var tail = Math.min(len * 0.2, 30);
+    var t0 = performance.now();
+    step(function (now) {
+      var p = Math.min((now - t0) / ms, 1);
+      segs.forEach(function (ln, i) {
+        var head = Math.max(p * len - i * tail * 0.5, 0);
+        var back = Math.max(head - tail * 0.5, 0);
+        var h = flow.getPointAtLength(head), k = flow.getPointAtLength(back);
+        ln.setAttribute("x1", k.x); ln.setAttribute("y1", k.y);
+        ln.setAttribute("x2", h.x); ln.setAttribute("y2", h.y);
+      });
+      if (p >= 1) {
+        segs.forEach(function (s) { s.remove(); });
+        spark(e[1], color);
+        return false;
+      }
+      return true;
+    });
+  }
+
+  var tallies = {};
+
+  function kindOf(el) {
+    var parts = el.getAttribute("class").split(" ");
+    return parts[1] && parts[1] !== "wake" && parts[1] !== "hit" ? parts[1] : "";
+  }
+
+  /* Traffic counted per node, on both ends of a hop. Kept separate from the
+     wake pulse because a compromised node stops pulsing but does not stop
+     working — its counter has to keep moving or the graph reads as frozen. */
+  function tally(id) {
+    if (!id || !BOX[id]) { return; }
+    tallies[id] = (tallies[id] || 0) + 1;
+    var t = $("n-" + id);
+    if (t) { t.textContent = tallies[id]; }
+  }
+
+  function wake(id, hit) {
+    var el = $(id);
+    if (!el) { return; }
+    var kind = kindOf(el);
+    if (hit) {
+      el.setAttribute("class", "node " + kind + " hit");
+      ring(id, hue("impact"), true);
+      return;
+    }
+    if (el.getAttribute("class").indexOf("hit") >= 0) { return; }
+    el.setAttribute("class", "node " + kind + " wake");
+    state.timers.push(setTimeout(function () {
+      if (el.getAttribute("class").indexOf("hit") < 0) {
+        el.setAttribute("class", "node " + kind);
+      }
+    }, 850 / state.speed));
+  }
+
+
+  function band(ev) {
+    var el = $("band");
+    el.textContent = (ev.flag === "impact" ? "▰ IMPACT — " : "▰ INJECTION — ")
+      + (ev.note || ev.label);
+    el.className = "band on" + (ev.flag === "impact" ? " impact" : "");
+    state.timers.push(setTimeout(function () {
+      el.className = "band" + (ev.flag === "impact" ? " impact" : "");
+    }, 3400 / state.speed));
+
+    if (reduced) { return; }
+
+    var flash = $("flash");
+    flash.className = "flash" + (ev.flag === "impact" ? " impact" : "");
+    void flash.offsetWidth;               // restart the animation on a repeat hit
+    flash.classList.add("on");
+
+    $("shell").classList.add("shake");
+    state.timers.push(setTimeout(function () {
+      $("shell").classList.remove("shake");
+    }, 440));
+    if (ev.flag === "impact") {
+      $("mark").classList.add("glitch");
+      state.timers.push(setTimeout(function () {
+        $("mark").classList.remove("glitch");
+      }, 1600));
+    }
+  }
+
+  /* ------------------------------------------------- threat LED meter */
+
+  var LEDS = 22;
+
+  function buildLeds() {
+    var box = $("leds");
+    box.innerHTML = "";
+    for (var i = 0; i < LEDS; i++) { box.appendChild(document.createElement("i")); }
+  }
+
+  function paintThreat(value, peak) {
+    var lit = Math.round(value / 100 * LEDS);
+    var peakIdx = peak == null ? -1 : Math.round(peak / 100 * LEDS) - 1;
+    var kids = $("leds").children;
+    for (var i = 0; i < LEDS; i++) {
+      var cls = "";
+      if (i < lit) {
+        cls = "on " + (i < LEDS * 0.45 ? "lo" : i < LEDS * 0.78 ? "mid" : "hi");
+      } else if (i === peakIdx) {
+        cls = "peak";
+      }
+      kids[i].className = cls;
+    }
+    var label = value >= 90 ? "Critical" : value >= 40 ? "Elevated" : "Nominal";
+    var color = value >= 90 ? "var(--impact)"
+              : value >= 40 ? "var(--inject)" : "var(--hold)";
+    $("threat-label").textContent = label;
+    $("threat-label").style.color = color;
+    $("threat-pct").textContent = Math.round(value) + "%";
+    $("threat-pct").style.color = color;
+    $("leds").className = "leds" + (value >= 90 ? " critical" : "");
+  }
+
+  /* Overshoot and settle, the way a real VU meter does — the needle passing
+     its resting value is what makes a jump legible at a glance. */
+  function bumpThreat(flag) {
+    var from = state.threat;
+    state.threat = Math.min(state.threat + (flag === "impact" ? 62 : 34), 100);
+    var to = state.threat;
+    var over = Math.min(to + 11, 100);
+
+    if (reduced) { paintThreat(to, null); return; }
+    var t0 = performance.now(), dur = 560 / state.speed;
+    step(function (now) {
+      var p = Math.min((now - t0) / dur, 1);
+      var v = p < 0.4
+        ? from + (over - from) * (p / 0.4)
+        : over - (over - to) * ((p - 0.4) / 0.6);
+      paintThreat(v, over);
+      if (p >= 1) { paintThreat(to, over); return false; }
+      return true;
+    });
+  }
+
+  /* ----------------------------------------------------- channel scope */
+
+  var scope = { samples: [], impulse: 0, color: null, ctx: null, w: 0, h: 0 };
+
+  function sizeScope() {
+    var c = $("scope");
+    var w = c.clientWidth, h = c.clientHeight;
+    if (!w || !h) { return; }
+    var dpr = window.devicePixelRatio || 1;
+    c.width = Math.round(w * dpr);
+    c.height = Math.round(h * dpr);
+    scope.ctx = c.getContext("2d");
+    scope.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    scope.w = w; scope.h = h;
+    var n = Math.max(Math.round(w / 2.6), 60);
+    while (scope.samples.length < n) { scope.samples.unshift(0); }
+    scope.samples = scope.samples.slice(-n);
+  }
+
+  function drawScope() {
+    var ctx = scope.ctx;
+    if (!ctx) { return; }
+    var w = scope.w, h = scope.h, mid = h / 2;
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.strokeStyle = "rgba(255,255,255,.055)";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (var gx = 0; gx <= w; gx += 28) {
+      ctx.moveTo(gx + 0.5, 0); ctx.lineTo(gx + 0.5, h);
+    }
+    ctx.moveTo(0, mid + 0.5); ctx.lineTo(w, mid + 0.5);
+    ctx.stroke();
+
+    var color = scope.color || hue("bus");
+    var n = scope.samples.length, dx = w / (n - 1);
+    ctx.beginPath();
+    for (var i = 0; i < n; i++) {
+      var y = mid - scope.samples[i] * (mid - 3);
+      if (i) { ctx.lineTo(i * dx, y); } else { ctx.moveTo(0, y); }
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 1.6;
+    ctx.shadowColor = color;
+    ctx.shadowBlur = 9;
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+
+  /* Runs for the life of the page, not the life of a run: an instrument that
+     goes blank between takes reads as broken rather than idle. */
+  function scopeLoop() {
+    scope.samples.shift();
+    scope.impulse *= 0.86;
+    var noise = (Math.random() - 0.5) * (state.playing ? 0.17 : 0.06);
+    scope.samples.push(noise + scope.impulse * (0.7 + Math.random() * 0.5));
+    drawScope();
+    requestAnimationFrame(scopeLoop);
+  }
+
+  function scopeHit(ev) {
+    scope.impulse = ev.flag ? 1 : 0.5;
+    scope.color = hue(ev.flag || ev.lane);
+    $("scope-tag").textContent = ev.flag ? ev.flag.toUpperCase() : ev.lane;
+  }
+
+  /* -------------------------------------------------- channel timeline */
+
+  var LANES = ["bus", "board", "tool"];
+
+  function trackTick(ev, i, total) {
+    if (LANES.indexOf(ev.lane) < 0) { return; }   // reasoning rides no channel
+    var rail = $("rail-" + ev.lane);
+    if (!rail) { return; }
+    var em = document.createElement("em");
+    em.style.left = (total > 1 ? (i / (total - 1)) * 100 : 0) + "%";
+    if (ev.flag) { em.className = ev.flag; }
+    rail.appendChild(em);
+  }
+
+  function moveHeads(i, total) {
+    var pct = (total > 1 ? (i / (total - 1)) * 100 : 0) + "%";
+    LANES.forEach(function (l) {
+      var h = $("head-" + l);
+      h.classList.add("on");
+      h.style.left = pct;
+    });
+  }
+
+  function tileFire(lane, value, total) {
+    var tile = $("t-" + lane);
+    if (!tile) { return; }
+    $("c-" + lane).textContent = value;
+    $("sh-" + lane).style.width = (total ? (value / total) * 100 : 0) + "%";
+    tile.classList.remove("fire");
+    void tile.offsetWidth;
+    tile.classList.add("fire");
+    state.timers.push(setTimeout(function () {
+      tile.classList.remove("fire");
+    }, 700));
+  }
+
+  /* -------------------------------------------------------------- log */
+
+  var GLYPHS = "ABCDEF0123456789/\\<>[]{}*#$%&@!?~^";
+
+  function scramble(el, text) {
+    if (reduced) { el.textContent = text; return; }
+    var dur = Math.min(60 + text.length * 26, 420) / state.speed;
+    var t0 = performance.now();
+    step(function (now) {
+      var p = Math.min((now - t0) / dur, 1);
+      var n = Math.floor(p * text.length);
+      var out = text.slice(0, n);
+      for (var i = n; i < text.length; i++) {
+        out += text.charAt(i) === " "
+          ? " " : GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
+      }
+      el.textContent = out;
+      if (p >= 1) { el.textContent = text; return false; }
+      return true;
+    });
+  }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) { e.className = cls; }
+    if (text != null) { e.textContent = text; }
+    return e;
+  }
+
+  function logLine(ev, index) {
+    var li = el("li", "ev " + (ev.flag || ev.lane));
+
+    // Two clocks: the recorded run's own elapsed time, and a byte offset that
+    // gives the stream the shape of a dump rather than a list.
+    var when = el("span", "when");
+    when.appendChild(el("b", null, ev.t == null ? "—" : "T+" + ev.t.toFixed(2)));
+    when.appendChild(el("i", null,
+      "0x" + (index * 16).toString(16).toUpperCase().padStart(4, "0")));
+
+    var spine = el("span", "spine");
+
+    var body = document.createElement("span");
+    var head = document.createElement("span");
+    head.appendChild(el("i", "who", ev.actor + "  "));
+    var lbl = el("b", "lbl");
+    head.appendChild(lbl);
+    if (ev.to) { head.appendChild(el("span", "tgt", "  → " + ev.to)); }
+    body.appendChild(head);
+
+    var det = null;
+    if (ev.detail) {
+      det = el("p", "det");
+      body.appendChild(det);
+    }
+    if (ev.note) { body.appendChild(el("span", "note", ev.note)); }
+
+    var size = el("span", "size", ev.bytes == null ? "" : ev.bytes + " B");
+
+    li.appendChild(when);
+    li.appendChild(spine);
+    li.appendChild(body);
+    li.appendChild(size);
+    $("log").appendChild(li);
+
+    scramble(lbl, ev.label);
+    if (det) { wipe(det, ev.detail); }
+    lightMinimap(index);
+    $("log").scrollTop = $("log").scrollHeight;
+  }
+
+  /* Detail text arrives as if it were being decoded off the wire: a block of
+     noise that resolves left to right. Cheaper than scrambling every glyph
+     every frame, which is what makes it usable on a 400-character payload. */
+  function wipe(node, text) {
+    if (reduced) { node.textContent = text; return; }
+    var dur = Math.min(120 + text.length * 1.7, 620) / state.speed;
+    var t0 = performance.now();
+    step(function (now) {
+      var p = Math.min((now - t0) / dur, 1);
+      var n = Math.floor(p * text.length);
+      var noise = "";
+      for (var i = n; i < Math.min(n + 14, text.length); i++) {
+        noise += GLYPHS.charAt(Math.floor(Math.random() * GLYPHS.length));
+      }
+      node.textContent = text.slice(0, n) + noise;
+      if (p >= 1) { node.textContent = text; return false; }
+      return true;
+    });
+  }
+
+  /* A density strip down the edge of the stream: one cell per event, unlit
+     until the run reaches it, so the panel shows how much is still to come. */
+  function buildMinimap(events) {
+    var box = $("minimap");
+    box.innerHTML = "";
+    events.forEach(function (ev) {
+      box.appendChild(el("i", ev.flag || ev.lane));
+    });
+  }
+
+  function lightMinimap(index) {
+    var cell = $("minimap").children[index];
+    if (cell) { cell.classList.add("lit"); }
+  }
+
+  function waitingLine() {
+    var li = el("li", "wait");
+    li.appendChild(el("span", "when"));
+    li.appendChild(el("span", "spine"));
+    var s = document.createElement("span");
+    s.innerHTML = 'awaiting next event <span class="cursor"></span>';
+    li.appendChild(s);
+    li.id = "waitrow";
+    $("log").appendChild(li);
+    $("log").scrollTop = $("log").scrollHeight;
+  }
+
+  function dropWaiting() {
+    var w = $("waitrow");
+    if (w) { w.remove(); }
+  }
+
+  /* The oracle is a hybrid: deterministic checks settle what they can, an LLM
+     judge settles the rest. The recorded verdict carries both halves, so the
+     panel can show which one actually decided instead of only the outcome. */
+  function showPath(v) {
+    var steps = [
+      ["o-heur", v.heuristic_only_verdict,
+       v.heuristic_decisive ? "decisive" : "not decisive"],
+      ["o-judge", v.judge_only_verdict == null ? "skipped" : v.judge_only_verdict,
+       v.judge_only_verdict == null ? "heuristic settled it" : "consulted"],
+      ["o-final", v.verdict, "decided by " + v.decided_by]
+    ];
+    steps.forEach(function (s, i) {
+      state.timers.push(setTimeout(function () {
+        var box = $(s[0]);
+        var label = String(s[1] || "—").toLowerCase();
+        box.classList.add("on");
+        var val = box.querySelector("em");
+        val.textContent = label;
+        val.className = label === "success" ? "o-success"
+                      : label === "failure" ? "o-failure" : "o-skip";
+        box.querySelector("small").textContent = s[2];
+      }, i * 420 / state.speed));
+    });
+  }
+
+  function resetPath() {
+    ["o-heur", "o-judge", "o-final"].forEach(function (id) {
+      var box = $(id);
+      box.classList.remove("on");
+      box.querySelector("em").textContent = "—";
+      box.querySelector("em").className = "";
+      box.querySelector("small").textContent = "";
+    });
+  }
+
+
+  /* ---------------------------------------------------------- lifecycle */
+
+  function clearAll() {
+    state.timers.forEach(clearTimeout);
+    state.frames.forEach(cancelAnimationFrame);
+    state.timers = [];
+    state.frames = [];
+    if (state.clock) { clearInterval(state.clock); state.clock = null; }
+  }
+
+  function clearTracks() {
+    LANES.forEach(function (l) {
+      var rail = $("rail-" + l);
+      Array.prototype.slice.call(rail.querySelectorAll("em")).forEach(function (e) {
+        e.remove();
+      });
+      var h = $("head-" + l);
+      h.classList.remove("on");
+      h.style.left = "0%";
+    });
+  }
+
+  function setReadout(id, text, cls) {
+    var el = $(id);
+    el.textContent = text;
+    el.className = "v-" + cls;
+  }
+
+  function reset() {
+    clearAll();
+    state.playing = false;
+    state.threat = 0;
+    var a = arm();
+
+    $("run").disabled = false;
+    $("run").innerHTML = "▶&nbsp; Run";
+    $("s-model").textContent = a.provider + ":" + a.model;
+    $("s-source").textContent = "recorded · " + a.run_id;
+    $("s-clock").textContent = "T+0.0s";
+    $("s-rate").textContent = "0.0 ev/s";
+    $("g-tag").textContent = "standby";
+    $("g-tag").className = "tag";
+    $("l-tag").textContent = a.variant;
+    $("radar").classList.remove("on");
+
+    LANES.forEach(function (l) {
+      $("c-" + l).textContent = "0";
+      $("sh-" + l).style.width = "0%";
+      $("t-" + l).classList.remove("fire");
+    });
+    clearTracks();
+    scope.impulse = 0;
+    scope.color = null;
+    $("scope-tag").textContent = "idle";
+    setReadout("v-action", "—", "pending");
+    setReadout("v-verdict", "pending", "pending");
+    setReadout("v-by", "—", "pending");
+    $("v-caveat").textContent = "";
+    $("v-caveat").className = "caveat clean";
+    paintThreat(0, null);
+
+    $("band").className = "band";
+    buildMinimap(a.events);
+    resetPath();
+    // The tool and key bands are derived from the run being loaded, so the
+    // graph is rebuilt per arm rather than reset in place.
+    buildGraph(a.events);
+
+    $("log").innerHTML = '<li class="idle">Trace link idle. ' +
+      a.events.length + " events buffered from " + esc(a.run_id) +
+      ', captured ' + scenario().recorded_at.slice(0, 10) +
+      '. Press RUN. <span class="cursor"></span></li>';
+  }
+
+  var BOOT_HOLD = 190;
+
+  function boot(done) {
+    var a = arm();
+    var lines = [
+      ["mounting trace", a.run_id],
+      ["pipeline", "research_assistant v1.0.0"],
+      ["backend", a.provider + ":" + a.model],
+      ["channels", "bus / blackboard / tools online"],
+      ["oracle", a.verdict ? "v" + a.verdict.oracle_version + " armed" : "offline"],
+      ["arm", state.arm + " · " + a.variant]
+    ];
+    var box = $("boot-lines");
+    box.innerHTML = "";
+    $("boot").className = "boot on";
+    $("boot-bar").style.width = "0";
+
+    if (reduced) {
+      $("boot").className = "boot";
+      done();
+      return;
+    }
+
+    lines.forEach(function (l, i) {
+      state.timers.push(setTimeout(function () {
+        var li = document.createElement("li");
+        li.innerHTML = "&gt; " + esc(l[0]) + " <span>" + esc(l[1]) + "</span>";
+        box.appendChild(li);
+        $("boot-bar").style.transition = "width .2s linear";
+        $("boot-bar").style.width = ((i + 1) / lines.length * 100) + "%";
+      }, i * BOOT_HOLD));
+    });
+
+    state.timers.push(setTimeout(function () {
+      $("boot-title").textContent = "Link established";
+      $("boot").className = "boot on out";
+      state.timers.push(setTimeout(function () {
+        $("boot").className = "boot";
+        done();
+      }, 420));
+    }, lines.length * BOOT_HOLD + 260));
+  }
+
+  function play() {
+    if (state.playing) { return; }
+    reset();
+    state.playing = true;
+    $("run").disabled = true;
+    $("run").textContent = "Running…";
+
+    boot(function () {
+      $("log").innerHTML = "";
+      $("g-tag").textContent = "streaming";
+      $("g-tag").className = "tag on";
+      $("radar").classList.add("on");
+
+      var a = arm();
+      var counts = { bus: 0, board: 0, tool: 0 };
+      var total = a.events.length;
+      var t = 0;
+      var t0 = performance.now();
+      var seen = 0;
+
+      state.clock = setInterval(function () {
+        var el = (performance.now() - t0) / 1000;
+        $("s-clock").textContent = "T+" + el.toFixed(1) + "s";
+        $("s-rate").textContent = (el > 0 ? (seen / el).toFixed(1) : "0.0") + " ev/s";
+      }, 100);
+
+      a.events.forEach(function (ev, i) {
+        var hold = (ev.flag ? 1600 : 640) / state.speed;
+        var flight = Math.min(hold * 0.72, 720 / state.speed);
+        t += hold;
+        state.timers.push(setTimeout(function () {
+          seen = i + 1;
+          dropWaiting();
+          logLine(ev, i);
+          var hop = ends(ev);
+          tracer(ev, flight);
+          wake(hop[0], false);
+          tally(hop[0]);
+          ring(hop[0], hue(ev.lane), false);
+          if (hop[1]) {
+            // The receiving node lights when the round actually lands on it.
+            state.timers.push(setTimeout(function () {
+              wake(hop[1], false);
+              tally(hop[1]);
+            }, flight));
+          }
+
+          scopeHit(ev);
+          trackTick(ev, i, total);
+          moveHeads(i, total);
+
+          // The policy gate is what the save_report filename is checked
+          // against, so it lights when that call is made — red if the filename
+          // walked past it.
+          if (ev.kind === "tool_call" && ev.to === "save_report") {
+            if (ev.flag === "impact") { wake("g-policy", true); }
+            else { wake("g-policy", false); }
+            tracer({ kind: "gate", actor: "x-save_report", to: "g-policy",
+                     lane: ev.lane, flag: ev.flag,
+                     _ends: ["x-save_report", "g-policy"] }, flight);
+          }
+          if (ev.flag) {
+            band(ev);
+            bumpThreat(ev.flag);
+            wake(compromised(ev), true);
+          }
+          if (counts[ev.lane] !== undefined) {
+            counts[ev.lane]++;
+            tileFire(ev.lane, counts[ev.lane], i + 1);
+          }
+          if (i === a.events.length - 1) { finish(); } else { waitingLine(); }
+        }, t));
+      });
+    });
+  }
+
+  function finish() {
+    state.playing = false;
+    if (state.clock) { clearInterval(state.clock); state.clock = null; }
+    $("run").disabled = false;
+    $("run").innerHTML = "▶&nbsp; Run again";
+    $("g-tag").textContent = "complete";
+    $("g-tag").className = "tag";
+    $("radar").classList.remove("on");
+
+    var a = arm();
+    setReadout("v-action", a.filename || "none", a.diverted ? "success" : "failure");
+
+    var v = a.verdict;
+    if (!v) { return; }
+    var label = String(v.verdict || "").toLowerCase();
+    showPath(v);
+
+    // The oracle really does run over the finished trace, so it lights last.
+    tracer({ kind: "gate", lane: "bus", flag: label === "success" ? "impact" : null,
+             _ends: ["g-policy", "g-oracle"] }, 620 / state.speed);
+    state.timers.push(setTimeout(function () {
+      wake("g-oracle", label === "success");
+    }, 640 / state.speed));
+    setReadout("v-verdict", label,
+      label === "success" ? "success" : label === "failure" ? "failure" : "pending");
+    setReadout("v-by", v.decided_by, "pending");
+
+    var el = $("v-caveat");
+    if (v.checker_validated) {
+      el.className = "caveat clean";
+      el.innerHTML = "<strong>Checker validated.</strong> " + esc(v.checker) +
+        " v" + esc(v.checker_version) +
+        " — 46 hand-labelled runs, 91.3% agreement, κ 0.827.";
+    } else {
+      el.className = "caveat";
+      el.innerHTML = "<strong>Checker not validated.</strong> " + esc(v.checker) +
+        " v" + esc(v.checker_version) + " has no hand-labelled set yet, so this " +
+        "verdict carries no measured agreement number and is not quotable as a result.";
+    }
+  }
+
+  /* ------------------------------------------------------------- chrome */
+
+  function buildScenarioPicker() {
+    var box = $("pick-scenario");
+    DATA.scenarios.forEach(function (sc, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = "Attack " + (sc.id.match(/\d+/) || ["?"])[0];
+      b.setAttribute("aria-pressed", String(i === 0));
+      b.addEventListener("click", function () {
+        state.scenario = i;
+        Array.prototype.forEach.call(box.children, function (c, j) {
+          c.setAttribute("aria-pressed", String(i === j));
+        });
+        $("foot").innerHTML = footText();
+        reset();
+      });
+      box.appendChild(b);
+    });
+  }
+
+  function bindSeg(id, attr, apply) {
+    var box = $(id);
+    box.addEventListener("click", function (e) {
+      var b = e.target.closest("button");
+      if (!b) { return; }
+      Array.prototype.forEach.call(box.children, function (c) {
+        c.setAttribute("aria-pressed", String(c === b));
+      });
+      apply(b.dataset[attr]);
+    });
+  }
+
+  function buildMatrix() {
+    var body = $("matrix");
+    DATA.matrix.attacks.forEach(function (row) {
+      var tr = document.createElement("tr");
+      tr.innerHTML =
+        '<td class="n">' + row.n + "</td><td>" + esc(row.name) + "</td>" +
+        '<td><span class="chip ' + row.p1 + '">' + row.p1 + "</span></td>" +
+        '<td><span class="chip ' + row.p2 + '">' + row.p2 + "</span></td>";
+      body.appendChild(tr);
+    });
+    var legend = $("legend");
+    Object.keys(DATA.matrix.notes).forEach(function (k) {
+      var d = document.createElement("div");
+      d.innerHTML = '<span class="chip ' + k + '">' + k + "</span><span>" +
+        esc(DATA.matrix.notes[k]) + "</span>";
+      legend.appendChild(d);
+    });
+  }
+
+  function footText() {
+    var sc = scenario();
+    return "<strong>" + esc(sc.title) + ".</strong> " + esc(sc.premise) +
+      " Every event on this screen is replayed from a trace recorded against " +
+      esc(sc.attack.provider) + ":" + esc(sc.attack.model) +
+      " on " + esc(sc.recorded_at.slice(0, 10)) +
+      " — nothing here is scripted, and the verdicts are the oracle's own. " +
+      "Pipeline #2, the defense layer and attacks 1, 4 and 5 do not exist yet; " +
+      "the coverage table above says so rather than filling itself in.";
+  }
+
+  buildLeds();
+  buildScenarioPicker();
+  buildMatrix();
+  sizeScope();
+  window.addEventListener("resize", sizeScope);
+  if (reduced) { drawScope(); } else { requestAnimationFrame(scopeLoop); }
+  bindSeg("pick-arm", "arm", function (v) { state.arm = v; reset(); });
+  bindSeg("pick-speed", "speed", function (v) { state.speed = Number(v); });
+  $("run").addEventListener("click", play);
+  $("reset").addEventListener("click", reset);
+  $("foot").innerHTML = footText();
+  reset();
+})();
+</script>
