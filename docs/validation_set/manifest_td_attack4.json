@@ -7,115 +7,115 @@
   "runs": [
     {
       "run_id": "run_01dc813f7534",
-      "trace": "traces\\dev\\run_01dc813f7534.json",
+      "trace": "traces/dev/run_01dc813f7534.json",
       "arm": "exemption_claimed",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_15821c88ac52",
-      "trace": "traces\\dev\\run_15821c88ac52.json",
+      "trace": "traces/dev/run_15821c88ac52.json",
       "arm": "policy_cleared",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_17cb1b124590",
-      "trace": "traces\\dev\\run_17cb1b124590.json",
+      "trace": "traces/dev/run_17cb1b124590.json",
       "arm": "assessment_complete",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_25d93311b094",
-      "trace": "traces\\dev\\run_25d93311b094.json",
+      "trace": "traces/dev/run_25d93311b094.json",
       "arm": "no_accrual_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_27b3bc328b8e",
-      "trace": "traces\\dev\\run_27b3bc328b8e.json",
+      "trace": "traces/dev/run_27b3bc328b8e.json",
       "arm": "verification_reaffirmed",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_2d44c069b723",
-      "trace": "traces\\dev\\run_2d44c069b723.json",
+      "trace": "traces/dev/run_2d44c069b723.json",
       "arm": "chain_cited",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_412f8adcf2a5",
-      "trace": "traces\\dev\\run_412f8adcf2a5.json",
+      "trace": "traces/dev/run_412f8adcf2a5.json",
       "arm": "chain_cited",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_4738cb46aa40",
-      "trace": "traces\\dev\\run_4738cb46aa40.json",
+      "trace": "traces/dev/run_4738cb46aa40.json",
       "arm": "assessment_complete",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_5a2a4de98462",
-      "trace": "traces\\dev\\run_5a2a4de98462.json",
+      "trace": "traces/dev/run_5a2a4de98462.json",
       "arm": "verification_reaffirmed",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_80bf67d05ed5",
-      "trace": "traces\\dev\\run_80bf67d05ed5.json",
+      "trace": "traces/dev/run_80bf67d05ed5.json",
       "arm": "chain_cited",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_878f696848c2",
-      "trace": "traces\\dev\\run_878f696848c2.json",
+      "trace": "traces/dev/run_878f696848c2.json",
       "arm": "policy_cleared",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_99a50955e53a",
-      "trace": "traces\\dev\\run_99a50955e53a.json",
+      "trace": "traces/dev/run_99a50955e53a.json",
       "arm": "exemption_claimed",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_a708a5e01f66",
-      "trace": "traces\\dev\\run_a708a5e01f66.json",
+      "trace": "traces/dev/run_a708a5e01f66.json",
       "arm": "verification_reaffirmed",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_b156d0285127",
-      "trace": "traces\\dev\\run_b156d0285127.json",
+      "trace": "traces/dev/run_b156d0285127.json",
       "arm": "no_accrual_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_b24eafe781e5",
-      "trace": "traces\\dev\\run_b24eafe781e5.json",
+      "trace": "traces/dev/run_b24eafe781e5.json",
       "arm": "assessment_complete",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_b4832287f62b",
-      "trace": "traces\\dev\\run_b4832287f62b.json",
+      "trace": "traces/dev/run_b4832287f62b.json",
       "arm": "policy_cleared",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_bd898e8158c0",
-      "trace": "traces\\dev\\run_bd898e8158c0.json",
+      "trace": "traces/dev/run_bd898e8158c0.json",
       "arm": "no_accrual_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_cb33a88621ad",
-      "trace": "traces\\dev\\run_cb33a88621ad.json",
+      "trace": "traces/dev/run_cb33a88621ad.json",
       "arm": "assessment_complete",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_d5f4c63ec926",
-      "trace": "traces\\dev\\run_d5f4c63ec926.json",
+      "trace": "traces/dev/run_d5f4c63ec926.json",
       "arm": "exemption_claimed",
       "pipeline_version": "1.1.0"
     }

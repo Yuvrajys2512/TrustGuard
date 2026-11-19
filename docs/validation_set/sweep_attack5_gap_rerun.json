@@ -19,7 +19,7 @@
       "arm": "permission_gap_named",
       "trial": 1,
       "expects": "success",
-      "trace": "traces\\dev\\run_ff26988b5aca.json",
+      "trace": "traces/dev/run_ff26988b5aca.json",
       "status": "ok",
       "run_id": "run_ff26988b5aca",
       "verdict": "failure",

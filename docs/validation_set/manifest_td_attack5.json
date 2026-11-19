@@ -7,121 +7,121 @@
   "runs": [
     {
       "run_id": "run_233e60c18d85",
-      "trace": "traces\\dev\\run_233e60c18d85.json",
+      "trace": "traces/dev/run_233e60c18d85.json",
       "arm": "plain_request",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_308b4c1a0a41",
-      "trace": "traces\\dev\\run_308b4c1a0a41.json",
+      "trace": "traces/dev/run_308b4c1a0a41.json",
       "arm": "no_launder_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_32274288b480",
-      "trace": "traces\\dev\\run_32274288b480.json",
+      "trace": "traces/dev/run_32274288b480.json",
       "arm": "plain_request",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_466cf82e5728",
-      "trace": "traces\\dev\\run_466cf82e5728.json",
+      "trace": "traces/dev/run_466cf82e5728.json",
       "arm": "attributed_request",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_4f4854767738",
-      "trace": "traces\\dev\\run_4f4854767738.json",
+      "trace": "traces/dev/run_4f4854767738.json",
       "arm": "permission_gap_named",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_5645537b9716",
-      "trace": "traces\\dev\\run_5645537b9716.json",
+      "trace": "traces/dev/run_5645537b9716.json",
       "arm": "plain_request",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_5a650e439b57",
-      "trace": "traces\\dev\\run_5a650e439b57.json",
+      "trace": "traces/dev/run_5a650e439b57.json",
       "arm": "attributed_request",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_676c410e12a6",
-      "trace": "traces\\dev\\run_676c410e12a6.json",
+      "trace": "traces/dev/run_676c410e12a6.json",
       "arm": "attributed_request",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_6b64ae2901fb",
-      "trace": "traces\\dev\\run_6b64ae2901fb.json",
+      "trace": "traces/dev/run_6b64ae2901fb.json",
       "arm": "no_launder_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_7629ba6efeb2",
-      "trace": "traces\\dev\\run_7629ba6efeb2.json",
+      "trace": "traces/dev/run_7629ba6efeb2.json",
       "arm": "no_launder_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_7c4b6f8f343c",
-      "trace": "traces\\dev\\run_7c4b6f8f343c.json",
+      "trace": "traces/dev/run_7c4b6f8f343c.json",
       "arm": "launder_explicit",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_7cf17eaea3bf",
-      "trace": "traces\\dev\\run_7cf17eaea3bf.json",
+      "trace": "traces/dev/run_7cf17eaea3bf.json",
       "arm": "launder_explicit",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_80953cd3789f",
-      "trace": "traces\\dev\\run_80953cd3789f.json",
+      "trace": "traces/dev/run_80953cd3789f.json",
       "arm": "permission_gap_named",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_92a2ad098479",
-      "trace": "traces\\dev\\run_92a2ad098479.json",
+      "trace": "traces/dev/run_92a2ad098479.json",
       "arm": "attributed_request",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_af9e60b09003",
-      "trace": "traces\\dev\\run_af9e60b09003.json",
+      "trace": "traces/dev/run_af9e60b09003.json",
       "arm": "launder_explicit",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_d086a1b382c7",
-      "trace": "traces\\dev\\run_d086a1b382c7.json",
+      "trace": "traces/dev/run_d086a1b382c7.json",
       "arm": "plain_request",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_e89c34cdd42e",
-      "trace": "traces\\dev\\run_e89c34cdd42e.json",
+      "trace": "traces/dev/run_e89c34cdd42e.json",
       "arm": "no_launder_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_ebf096a67c66",
-      "trace": "traces\\dev\\run_ebf096a67c66.json",
+      "trace": "traces/dev/run_ebf096a67c66.json",
       "arm": "launder_explicit",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_f3cd668e9d2e",
-      "trace": "traces\\dev\\run_f3cd668e9d2e.json",
+      "trace": "traces/dev/run_f3cd668e9d2e.json",
       "arm": "permission_gap_named",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_ff2aff448d26",
-      "trace": "traces\\dev\\run_ff2aff448d26.json",
+      "trace": "traces/dev/run_ff2aff448d26.json",
       "arm": "permission_gap_named",
       "pipeline_version": "1.1.0"
     }

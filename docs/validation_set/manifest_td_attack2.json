@@ -7,217 +7,217 @@
   "runs": [
     {
       "run_id": "run_09bb0537222f",
-      "trace": "traces\\dev\\run_09bb0537222f.json",
+      "trace": "traces/dev/run_09bb0537222f.json",
       "arm": "full",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_11911977810e",
-      "trace": "traces\\dev\\run_11911977810e.json",
+      "trace": "traces/dev/run_11911977810e.json",
       "arm": "hedged",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_13b2550650d0",
-      "trace": "traces\\dev\\run_13b2550650d0.json",
+      "trace": "traces/dev/run_13b2550650d0.json",
       "arm": "implausible",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_19b07bc89b7b",
-      "trace": "traces\\dev\\run_19b07bc89b7b.json",
+      "trace": "traces/dev/run_19b07bc89b7b.json",
       "arm": "full",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_291ad319ff7a",
-      "trace": "traces\\dev\\run_291ad319ff7a.json",
+      "trace": "traces/dev/run_291ad319ff7a.json",
       "arm": "no_authority_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_2cad686c07a5",
-      "trace": "traces\\dev\\run_2cad686c07a5.json",
+      "trace": "traces/dev/run_2cad686c07a5.json",
       "arm": "ack_bait",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_61803beffe8c",
-      "trace": "traces\\dev\\run_61803beffe8c.json",
+      "trace": "traces/dev/run_61803beffe8c.json",
       "arm": "no_authority_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_67dddbdf29bc",
-      "trace": "traces\\dev\\run_67dddbdf29bc.json",
+      "trace": "traces/dev/run_67dddbdf29bc.json",
       "arm": "ack_bait",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_704e218593d2",
-      "trace": "traces\\dev\\run_704e218593d2.json",
+      "trace": "traces/dev/run_704e218593d2.json",
       "arm": "ack_bait",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_73143f0b37ab",
-      "trace": "traces\\dev\\run_73143f0b37ab.json",
+      "trace": "traces/dev/run_73143f0b37ab.json",
       "arm": "implausible",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_76da4d324cce",
-      "trace": "traces\\dev\\run_76da4d324cce.json",
+      "trace": "traces/dev/run_76da4d324cce.json",
       "arm": "no_authority_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_7a48feccf0a4",
-      "trace": "traces\\dev\\run_7a48feccf0a4.json",
+      "trace": "traces/dev/run_7a48feccf0a4.json",
       "arm": "implausible",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_7f4fabfa3390",
-      "trace": "traces\\dev\\run_7f4fabfa3390.json",
+      "trace": "traces/dev/run_7f4fabfa3390.json",
       "arm": "no_authority_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_82c3b7c6feaa",
-      "trace": "traces\\dev\\run_82c3b7c6feaa.json",
+      "trace": "traces/dev/run_82c3b7c6feaa.json",
       "arm": "ack_bait",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_95f3081f7a25",
-      "trace": "traces\\dev\\run_95f3081f7a25.json",
+      "trace": "traces/dev/run_95f3081f7a25.json",
       "arm": "hedged",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_964ae642bca6",
-      "trace": "traces\\dev\\run_964ae642bca6.json",
+      "trace": "traces/dev/run_964ae642bca6.json",
       "arm": "implausible",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_9bf90be067e6",
-      "trace": "traces\\dev\\run_9bf90be067e6.json",
+      "trace": "traces/dev/run_9bf90be067e6.json",
       "arm": "full",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_9dc1b0580951",
-      "trace": "traces\\dev\\run_9dc1b0580951.json",
+      "trace": "traces/dev/run_9dc1b0580951.json",
       "arm": "implausible",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_a257bbc2bd26",
-      "trace": "traces\\dev\\run_a257bbc2bd26.json",
+      "trace": "traces/dev/run_a257bbc2bd26.json",
       "arm": "full",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_a6afc3839234",
-      "trace": "traces\\dev\\run_a6afc3839234.json",
+      "trace": "traces/dev/run_a6afc3839234.json",
       "arm": "no_marker",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_a90745e97484",
-      "trace": "traces\\dev\\run_a90745e97484.json",
+      "trace": "traces/dev/run_a90745e97484.json",
       "arm": "full",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_abef48b0a1c0",
-      "trace": "traces\\dev\\run_abef48b0a1c0.json",
+      "trace": "traces/dev/run_abef48b0a1c0.json",
       "arm": "no_authority_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_aff7050d65e3",
-      "trace": "traces\\dev\\run_aff7050d65e3.json",
+      "trace": "traces/dev/run_aff7050d65e3.json",
       "arm": "no_authority_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_b39ca5c88a6f",
-      "trace": "traces\\dev\\run_b39ca5c88a6f.json",
+      "trace": "traces/dev/run_b39ca5c88a6f.json",
       "arm": "no_authority_control",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_be4f02fbace9",
-      "trace": "traces\\dev\\run_be4f02fbace9.json",
+      "trace": "traces/dev/run_be4f02fbace9.json",
       "arm": "hedged",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_bf0260645322",
-      "trace": "traces\\dev\\run_bf0260645322.json",
+      "trace": "traces/dev/run_bf0260645322.json",
       "arm": "full",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_c739b8d25a56",
-      "trace": "traces\\dev\\run_c739b8d25a56.json",
+      "trace": "traces/dev/run_c739b8d25a56.json",
       "arm": "full",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_c78a10c92990",
-      "trace": "traces\\dev\\run_c78a10c92990.json",
+      "trace": "traces/dev/run_c78a10c92990.json",
       "arm": "ack_bait",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_c8f2020b891c",
-      "trace": "traces\\dev\\run_c8f2020b891c.json",
+      "trace": "traces/dev/run_c8f2020b891c.json",
       "arm": "no_marker",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_d28c7457ab34",
-      "trace": "traces\\dev\\run_d28c7457ab34.json",
+      "trace": "traces/dev/run_d28c7457ab34.json",
       "arm": "no_marker",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_eda5fc8b5fb4",
-      "trace": "traces\\dev\\run_eda5fc8b5fb4.json",
+      "trace": "traces/dev/run_eda5fc8b5fb4.json",
       "arm": "full",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_eeaf521625e9",
-      "trace": "traces\\dev\\run_eeaf521625e9.json",
+      "trace": "traces/dev/run_eeaf521625e9.json",
       "arm": "hedged",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_ef35379ad157",
-      "trace": "traces\\dev\\run_ef35379ad157.json",
+      "trace": "traces/dev/run_ef35379ad157.json",
       "arm": "hedged",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_ef6f3e593037",
-      "trace": "traces\\dev\\run_ef6f3e593037.json",
+      "trace": "traces/dev/run_ef6f3e593037.json",
       "arm": "ack_bait",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_f0369e919f53",
-      "trace": "traces\\dev\\run_f0369e919f53.json",
+      "trace": "traces/dev/run_f0369e919f53.json",
       "arm": "no_marker",
       "pipeline_version": "1.1.0"
     },
     {
       "run_id": "run_f9ea6eaa27e8",
-      "trace": "traces\\dev\\run_f9ea6eaa27e8.json",
+      "trace": "traces/dev/run_f9ea6eaa27e8.json",
       "arm": "no_authority_control",
       "pipeline_version": "1.1.0"
     }
